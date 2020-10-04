@@ -1,7 +1,7 @@
 extends RigidBody
 class_name Arrow
 
-export(float) var initial_speed := 30.0
+export(float) var initial_speed := 25.0
 
 func _ready():
 	set_as_toplevel(true)

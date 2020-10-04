@@ -1,4 +1,5 @@
 extends Area
+class_name DestroyerPortal
 
 signal destroyed_projectile
 

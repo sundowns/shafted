@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "Arrow",
 "language": "GDScript",
 "path": "res://Arrow.gd"
+}, {
+"base": "Area",
+"class": "DestroyerPortal",
+"language": "GDScript",
+"path": "res://DestroyerPortal.gd"
+}, {
+"base": "Spatial",
+"class": "SpawnerPortal",
+"language": "GDScript",
+"path": "res://SpawnerPortal.gd"
 } ]
 _global_script_class_icons={
-"Arrow": ""
+"Arrow": "",
+"DestroyerPortal": "",
+"SpawnerPortal": ""
 }
 
 [application]

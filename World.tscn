@@ -58,3 +58,12 @@ shape = SubResource( 2 )
 
 [node name="PortalPair" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -12 )
+arrow_count = 3
+
+[node name="SpawnerPortal" parent="PortalPair" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0 )
+
+[node name="DestroyerPortal" parent="PortalPair" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0 )
+
+[editable path="PortalPair"]

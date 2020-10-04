@@ -1,13 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.7
-
-[sub_resource type="CylinderShape" id=2]
-radius = 0.06
-height = 8.0
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -23,17 +19,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
 
-[node name="AimCast" type="RayCast" parent="Head"]
+[node name="SkyboxCast" type="RayCast" parent="Head"]
 enabled = true
 cast_to = Vector3( 0, 0, -250 )
 
-[node name="PushRegion" type="Area" parent="Head"]
-monitorable = false
-collision_layer = 0
+[node name="PushCast" type="RayCast" parent="Head"]
+enabled = true
+cast_to = Vector3( 0, 0, -6 )
 collision_mask = 4
-
-[node name="CollisionShape" type="CollisionShape" parent="Head/PushRegion"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -4 )
-shape = SubResource( 2 )
-[connection signal="body_entered" from="Head/PushRegion" to="." method="_on_PushRegion_body_entered"]
-[connection signal="body_exited" from="Head/PushRegion" to="." method="_on_PushRegion_body_exited"]

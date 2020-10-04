@@ -1,7 +1,7 @@
 extends Spatial
 
 export(int) var arrow_count := 1
-export(float) var spawn_interval := 0.2
+export(float) var spawn_interval := 0.3
 
 onready var spawner_portal: SpawnerPortal = $SpawnerPortal 
 

@@ -3,7 +3,7 @@
 [ext_resource path="res://Arrow.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleMesh" id=3]
-radius = 0.25
+radius = 0.2
 
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.25
@@ -12,7 +12,11 @@ radius = 0.25
 collision_layer = 4
 collision_mask = 15
 gravity_scale = 0.0
+continuous_cd = true
+linear_damp = 0.0
+angular_damp = 0.0
 script = ExtResource( 1 )
+initial_speed = 15.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 3 )
@@ -23,4 +27,8 @@ shape = SubResource( 2 )
 
 [node name="RedirectLockoutTimer" type="Timer" parent="."]
 process_mode = 0
+
+[node name="HighlightFadeTimer" type="Timer" parent="."]
+wait_time = 0.2
 [connection signal="timeout" from="RedirectLockoutTimer" to="." method="_on_RedirectLockoutTimer_timeout"]
+[connection signal="timeout" from="HighlightFadeTimer" to="." method="remove_highlight"]

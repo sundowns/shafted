@@ -17,8 +17,8 @@ export(float) var gravity: float = 12
 
 onready var camera: Camera = $Head/Camera
 onready var head: Spatial = $Head
-onready var push_region: Area = $Head/PushRegion
-onready var aimcast: RayCast = $Head/AimCast
+onready var skybox_cast: RayCast = $Head/SkyboxCast
+onready var push_cast: RayCast = $Head/PushCast
 
 const highlight_material = preload("res://materials/push_highlight.tres")
 const mouse_sensitivity: float = 0.05
@@ -37,6 +37,9 @@ func _input(event):
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
+	
+#	if event is InputEventMouseButton and event.pressed:
+#		print(event)
 
 func _physics_process(delta):
 	match state:
@@ -141,16 +144,13 @@ func handle_ceiling_collision():
 		velocity.y = 0
 
 func handle_push():
-	if aimcast.is_colliding() and Input.is_action_pressed("fire"):
-		var target_position = aimcast.get_collision_point()
-		for projectile in push_region.get_overlapping_bodies():
+	if push_cast.is_colliding():
+		var projectile = push_cast.get_collider()
+		projectile.highlight(highlight_material)
+		
+		if skybox_cast.is_colliding() and Input.is_action_pressed("fire"):
+			var target_position = skybox_cast.get_collision_point()
 			if projectile is Arrow:
-				projectile.redirect(target_position)
+				projectile.redirect(target_position, push_cast.get_collision_point())
 			else:
 				print("Warning: Tried to push a non-arrow projectile somehow...")
-
-func _on_PushRegion_body_entered(body: Arrow):
-	body.highlight(highlight_material)
-
-func _on_PushRegion_body_exited(body: Arrow):
-	body.remove_highlight()

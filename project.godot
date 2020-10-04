@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "RigidBody",
+"class": "Arrow",
+"language": "GDScript",
+"path": "res://Arrow.gd"
+} ]
 _global_script_class_icons={
-
+"Arrow": ""
 }
 
 [application]

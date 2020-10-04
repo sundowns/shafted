@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://SpawnerPortal.tscn" type="PackedScene" id=1]
+[ext_resource path="res://DestroyerPortal.tscn" type="PackedScene" id=2]
+
+[node name="PortalPair" type="Spatial"]
+
+[node name="SpawnerPortal" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
+target_node_path = NodePath("../DestroyerPortal")
+
+[node name="DestroyerPortal" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0 )
+[connection signal="destroyed_projectile" from="DestroyerPortal" to="SpawnerPortal" method="_on_DestroyerPortal_destroyed_projectile"]

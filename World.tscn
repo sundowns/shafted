@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/skybox.png" type="Texture" id=2]
+[ext_resource path="res://PortalPair.tscn" type="PackedScene" id=3]
 
 [sub_resource type="PanoramaSky" id=6]
 panorama = ExtResource( 2 )
@@ -39,14 +40,21 @@ environment = SubResource( 7 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39189, 0 )
 
-[node name="Floor" type="StaticBody" parent="."]
+[node name="Statics" type="Node" parent="."]
+
+[node name="Floor" type="StaticBody" parent="Statics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+[node name="MeshInstance" type="MeshInstance" parent="Statics/Floor"]
 transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 3 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+[node name="CollisionShape" type="CollisionShape" parent="Statics/Floor"]
 transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
 shape = SubResource( 2 )
+
+[node name="Projectiles" type="Node" parent="."]
+
+[node name="PortalPair" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -12 )

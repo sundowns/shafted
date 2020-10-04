@@ -17,7 +17,9 @@ export(float) var gravity: float = 12
 
 onready var camera: Camera = $Head/Camera
 onready var head: Spatial = $Head
+onready var push_region: Area = $Head/PushRegion
 
+const highlight_material = preload("res://materials/push_highlight.tres")
 const mouse_sensitivity: float = 0.05
 const terminal_fall_velocity: float = -25.0
 
@@ -44,15 +46,13 @@ func _physics_process(delta):
 		PlayerState.AIRBORNE:
 			airborne_state(delta)
 	apply_movement()
+	handle_push()
 
 func set_state(new_state):
 	if state == new_state:
 		return
 	leave_state(new_state, state)
 	state = new_state
-#	match state:
-#		PlayerState.AIRBORNE:
-#			velocity.y = 0
 
 func leave_state(_new_state, _previous_state):
 	pass
@@ -138,3 +138,14 @@ func handle_gravity(delta):
 func handle_ceiling_collision():
 	if is_on_ceiling() and velocity.y > 0:
 		velocity.y = 0
+
+func handle_push():
+	if Input.is_action_pressed("fire"):
+		for projectile in push_region.get_overlapping_bodies():
+			print(projectile)
+
+func _on_PushRegion_body_entered(body: Arrow):
+	body.highlight(highlight_material)
+
+func _on_PushRegion_body_exited(body: Arrow):
+	body.remove_highlight()

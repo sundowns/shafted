@@ -28,7 +28,7 @@ func start():
 
 func spawn():
 	var new_arrow: Arrow = arrow_scene.instance()
-	get_tree().current_scene.get_node("./Projectiles").add_child(new_arrow)
+	get_tree().current_scene.get_node("./World/Projectiles").add_child(new_arrow)
 	
 	# move our arrows initial position slightly towards target
 	var target_direction = (target_position - global_transform.origin).normalized()

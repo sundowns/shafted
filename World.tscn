@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/skybox.png" type="Texture" id=2]
 [ext_resource path="res://PortalPair.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Skybox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PanoramaSky" id=6]
 panorama = ExtResource( 2 )
@@ -54,11 +55,13 @@ material/0 = SubResource( 3 )
 transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
 shape = SubResource( 2 )
 
+[node name="Skybox" parent="Statics" instance=ExtResource( 4 )]
+
 [node name="Projectiles" type="Node" parent="."]
 
 [node name="PortalPair" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -12 )
-arrow_count = 3
+arrow_count = 5
 
 [node name="SpawnerPortal" parent="PortalPair" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0 )

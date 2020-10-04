@@ -6,8 +6,8 @@
 radius = 0.7
 
 [sub_resource type="CylinderShape" id=2]
-radius = 0.1
-height = 6.0
+radius = 0.06
+height = 8.0
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -23,13 +23,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
 
+[node name="AimCast" type="RayCast" parent="Head"]
+enabled = true
+cast_to = Vector3( 0, 0, -250 )
+
 [node name="PushRegion" type="Area" parent="Head"]
 monitorable = false
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Head/PushRegion"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -3 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -4 )
 shape = SubResource( 2 )
 [connection signal="body_entered" from="Head/PushRegion" to="." method="_on_PushRegion_body_entered"]
 [connection signal="body_exited" from="Head/PushRegion" to="." method="_on_PushRegion_body_exited"]

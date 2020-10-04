@@ -13,15 +13,17 @@ var target_position: Vector3 = Vector3.ZERO
 var total_arrow_count: int = 1
 var spawn_interval: float = 0.3
 var total_arrows_spawned: int = 0
+var is_unlimited: bool = false
 
 func _ready():
 	var target = get_node(target_node_path)
 	assert(target != null, "SpawnerPortal target is null")
 	target_position = target.global_transform.origin
 
-func set_properties(_arrow_count: int, _spawn_interval: float):
+func set_properties(_arrow_count: int, _spawn_interval: float, _is_unlimited: bool):
 	total_arrow_count = _arrow_count
 	spawn_interval = _spawn_interval
+	is_unlimited = _is_unlimited
 
 func start():
 	spawn_timer.start(spawn_interval)
@@ -35,15 +37,10 @@ func spawn():
 	var spawn_offset = target_direction * spawn_offset_distance
 	new_arrow.global_transform.origin = spawn_location.global_transform.origin + spawn_offset
 	new_arrow.queue_push(target_position)
-#	call_deferred("new_arrow.push_toward")
-#	new_arrow.set_orientation(target_position)
-#	new_arrow.apply_impulse_towards_position(target_position)
 
 func _on_SpawnTimer_timeout():
-	if total_arrows_spawned < total_arrow_count:
+	if total_arrows_spawned < total_arrow_count or is_unlimited:
 		total_arrows_spawned += 1
 		spawn()
 		spawn_timer.start(spawn_interval)
 
-func _on_DestroyerPortal_destroyed_projectile():
-	spawn()

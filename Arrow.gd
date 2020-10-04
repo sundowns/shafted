@@ -54,3 +54,6 @@ func redirect(target_position, from_position):
 
 func _on_RedirectLockoutTimer_timeout():
 	can_redirect = true
+
+func _on_ExpiryTimer_timeout():
+	queue_free()

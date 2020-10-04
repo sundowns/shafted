@@ -30,5 +30,10 @@ process_mode = 0
 
 [node name="HighlightFadeTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="ExpiryTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
 [connection signal="timeout" from="RedirectLockoutTimer" to="." method="_on_RedirectLockoutTimer_timeout"]
 [connection signal="timeout" from="HighlightFadeTimer" to="." method="remove_highlight"]
+[connection signal="timeout" from="ExpiryTimer" to="." method="_on_ExpiryTimer_timeout"]

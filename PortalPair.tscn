@@ -13,4 +13,4 @@ target_node_path = NodePath("../DestroyerPortal")
 
 [node name="DestroyerPortal" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
-[connection signal="destroyed_projectile" from="DestroyerPortal" to="SpawnerPortal" method="_on_DestroyerPortal_destroyed_projectile"]
+[connection signal="destroyed_projectile" from="DestroyerPortal" to="." method="_on_DestroyerPortal_destroyed_projectile"]

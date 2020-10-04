@@ -3,7 +3,7 @@ class_name Arrow
 
 export(float) var initial_speed := 15.0
 
-onready var mesh: MeshInstance = $MeshInstance
+onready var mesh: MeshInstance = $arrow/Arrow
 onready var redirect_lockout_timer: Timer = $RedirectLockoutTimer
 onready var highlight_fade_timer: Timer = $HighlightFadeTimer
 

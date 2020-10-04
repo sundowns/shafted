@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/target.glb" type="PackedScene" id=1]
+[ext_resource path="res://materials/target_highlight.tres" type="Material" id=2]
+[ext_resource path="res://materials/target_base.tres" type="Material" id=3]
+
+[node name="target" instance=ExtResource( 1 )]
+
+[node name="Target" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 2 )

@@ -1,19 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Target.gd" type="Script" id=1]
+[ext_resource path="res://meshes/target.tscn" type="PackedScene" id=2]
 
-[sub_resource type="CylinderMesh" id=1]
-top_radius = 0.4
-bottom_radius = 0.4
-height = 0.1
-radial_segments = 32
-
-[sub_resource type="SpatialMaterial" id=3]
-flags_unshaded = true
-albedo_color = Color( 0.517647, 0.203922, 0.203922, 1 )
-
-[sub_resource type="CylinderShape" id=2]
-radius = 0.42
+[sub_resource type="CylinderShape" id=3]
+radius = 0.43
 height = 0.13
 
 [node name="Target" type="StaticBody"]
@@ -22,14 +13,12 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 3 )
+[node name="target" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Hitbox" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
@@ -37,5 +26,5 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Hitbox"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

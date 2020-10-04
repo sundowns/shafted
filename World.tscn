@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/skybox.png" type="Texture" id=2]
 [ext_resource path="res://PortalPair.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Skybox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Target.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Door.tscn" type="PackedScene" id=6]
 
 [sub_resource type="PanoramaSky" id=6]
 panorama = ExtResource( 2 )
@@ -98,13 +99,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="PortalPair5" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.272976, -0.835059, 0.477661, 0.406345, -0.349968, -0.844042, 0.871991, 0.424498, 0.243789, 10.7924, 3.96144, -14.2139 )
+transform = Transform( 0.272976, -0.835059, 0.477661, 0.406345, -0.349968, -0.844042, 0.871991, 0.424498, 0.243789, -1.74445, 3.96144, 11.8596 )
 
 [node name="SpawnerPortal" parent="PortalPair5" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 
 [node name="DestroyerPortal" parent="PortalPair5" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Door" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7056, 2.16251, -15.6722 )
+count_to_open = 3
 
 [node name="Target" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.16251, -16.3328 )
@@ -114,6 +119,9 @@ transform = Transform( 0.724268, 0, 0.689518, 0, 1, 0, -0.689518, 0, 0.724268, -
 
 [node name="Target3" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.700698, 0, -0.713458, 0, 1, 0, 0.713458, 0, 0.700698, 15.4233, 5.33008, -26.5194 )
+[connection signal="target_hit" from="Target" to="Door" method="increment_open_counter"]
+[connection signal="target_hit" from="Target2" to="Door" method="increment_open_counter"]
+[connection signal="target_hit" from="Target3" to="Door" method="increment_open_counter"]
 
 [editable path="PortalPair"]
 

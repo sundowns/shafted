@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/skybox.png" type="Texture" id=2]
 [ext_resource path="res://PortalPair.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Skybox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Target.tscn" type="PackedScene" id=5]
 
 [sub_resource type="PanoramaSky" id=6]
 panorama = ExtResource( 2 )
@@ -104,6 +105,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 
 [node name="DestroyerPortal" parent="PortalPair5" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Target" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.16251, -16.3328 )
+
+[node name="Target2" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.724268, 0, 0.689518, 0, 1, 0, -0.689518, 0, 0.724268, -18.6176, 2.16251, -26.0115 )
+
+[node name="Target3" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.700698, 0, -0.713458, 0, 1, 0, 0.713458, 0, 0.700698, 15.4233, 5.33008, -26.5194 )
 
 [editable path="PortalPair"]
 

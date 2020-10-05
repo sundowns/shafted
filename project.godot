@@ -112,4 +112,4 @@ interact={
 [rendering]
 
 quality/filters/msaa=2
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://levels/game_environment.tres"

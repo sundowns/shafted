@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/skybox.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/signs/push_text.tres" type="Material" id=10]
 [ext_resource path="res://assets/signs/break_text.tres" type="Material" id=11]
 [ext_resource path="res://LevelCompleteZone.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Floor.tscn" type="PackedScene" id=13]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 2 )
@@ -28,28 +29,7 @@ tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 1.0
 
-[sub_resource type="CubeMesh" id=3]
-
-[sub_resource type="OpenSimplexNoise" id=4]
-seed = 2
-octaves = 4
-period = 128.0
-lacunarity = 4.0
-
-[sub_resource type="NoiseTexture" id=5]
-width = 1024
-height = 1024
-noise = SubResource( 4 )
-
-[sub_resource type="SpatialMaterial" id=6]
-albedo_color = Color( 1, 0.607843, 0, 1 )
-albedo_texture = SubResource( 5 )
-
-[sub_resource type="BoxShape" id=7]
-
-[sub_resource type="BoxShape" id=8]
-
-[sub_resource type="Curve3D" id=9]
+[sub_resource type="Curve3D" id=3]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -2.52425, -0.712924, 0.926851, 0, 0, 0, 0, 0, 0, -11.354, 0.161399, 0.454142, 0, 0, 0, 0, 0, 0, -7.09933, 5.35228, -0.0653191, 0, 0, 0, 0, 0, 0, -4.54484, 5.03297, 0.0851803, 0, 0, 0, 0, 0, 0, 0.0107555, -0.095077, 0.0133991, 0, 0, 0, 0, 0, 0, -2.52425, -0.712924, 0.926851 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
@@ -65,24 +45,7 @@ transform = Transform( 0.7405, 0, 0.672057, 0, 1, 0, -0.672057, 0, 0.7405, 6.746
 
 [node name="Statics" type="Node" parent="."]
 
-[node name="Floor" type="StaticBody" parent="Statics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Statics/Floor"]
-transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 6 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Statics/Floor"]
-transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
-shape = SubResource( 7 )
-
 [node name="Skybox" parent="Statics" instance=ExtResource( 4 )]
-
-[node name="Wall" type="StaticBody" parent="Statics"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Statics/Wall"]
-shape = SubResource( 8 )
 
 [node name="Door" parent="Statics" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7056, 1.74861, -15.6722 )
@@ -90,6 +53,8 @@ count_to_open = 4
 
 [node name="ResetButton" parent="Statics" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.76484, 0.929397, -11.2225 )
+
+[node name="Floor" parent="Statics" instance=ExtResource( 13 )]
 
 [node name="Projectiles" type="Node" parent="."]
 
@@ -153,7 +118,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.59063, 6.74643, -8.0373 )
 
 [node name="Path" parent="MovingTarget" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.7501 )
-curve = SubResource( 9 )
+curve = SubResource( 3 )
 
 [node name="PathFollow" parent="MovingTarget/Path" index="0"]
 move_speed = 3.0

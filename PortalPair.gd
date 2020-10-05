@@ -12,6 +12,7 @@ signal projectile_was_destroyed
 func _ready():
 	if not is_unlimited:
 		connect("projectile_was_destroyed", spawner_portal, "spawn")
+	destroyer_portal.set_orientation(spawner_portal.global_transform.origin)
 	spawner_portal.set_properties(arrow_count, spawn_interval, is_unlimited)
 	spawner_portal.start()
 

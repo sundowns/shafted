@@ -15,6 +15,11 @@ background_mode = 2
 background_sky = SubResource( 1 )
 ambient_light_color = Color( 0.537255, 0.537255, 0.537255, 1 )
 ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0.619608, 0.619608, 0.619608, 0.584314 )
+fog_depth_begin = 4.0
+glow_enabled = true
+glow_intensity = 1.0
 
 [sub_resource type="CubeMesh" id=3]
 

@@ -46,11 +46,11 @@ func _on_SpawnTimer_timeout():
 		spawn()
 		spawn_timer.start(spawn_interval)
 
-func set_orientation(target_position: Vector3):
-	var to_target = (target_position - global_transform.origin).normalized()
+func set_orientation(target_pos: Vector3):
+	var to_target = (target_pos - global_transform.origin).normalized()
 	# Woke maths gaming
 	var dot_product_to_up = to_target.dot(Vector3.UP)
 	if abs(dot_product_to_up) == 1:
 		portal_meshes.global_rotate(Vector3(1.0, 0, 0), deg2rad(90 * sign(dot_product_to_up)))
 	else:
-		portal_meshes.look_at(target_position, Vector3.UP)
+		portal_meshes.look_at(target_pos, Vector3.UP)

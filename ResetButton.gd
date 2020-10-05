@@ -16,6 +16,7 @@ func activate():
 
 func on_animation_end():
 	is_activated = false
+	get_tree().reload_current_scene()
 
 func highlight(highlight_material: Resource):
 	mesh.material_override = highlight_material

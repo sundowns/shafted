@@ -1,6 +1,7 @@
 extends Node
 
 onready var footsteps = $Footsteps
+onready var target_break = $TargetBreak
 
 var rng = RandomNumberGenerator.new()
 

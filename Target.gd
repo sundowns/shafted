@@ -8,6 +8,8 @@ func _on_Hitbox_body_entered(body):
 	body.hit_target()
 	emit_signal("target_hit")
 	replace_with_fractured_mesh()
+	AudioManager.target_break.global_transform = self.global_transform
+	AudioManager.target_break.play()
 	queue_free()
 
 func replace_with_fractured_mesh():

@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://ui/playbutton.png" type="Texture" id=2]
+[ext_resource path="res://ui/playbutton_highlight.png" type="Texture" id=3]
+[ext_resource path="res://ui/titletext.png" type="Texture" id=4]
+[ext_resource path="res://assets/skybox.png" type="Texture" id=5]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -10,16 +14,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1402.34
+margin_top = -769.332
+margin_right = 1413.66
+margin_bottom = 558.668
+grow_horizontal = 2
+texture = ExtResource( 5 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="TextureRect" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.1
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -125.5
-margin_top = -60.5
-margin_right = 125.5
-margin_bottom = 60.5
-text = "Start"
+anchor_bottom = 0.1
+margin_left = -325.0
+margin_right = 325.0
+margin_bottom = 325.0
+texture = ExtResource( 4 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = -222.0
+margin_right = 150.0
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }

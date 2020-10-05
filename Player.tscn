@@ -41,6 +41,7 @@ wait_time = 0.25
 
 [node name="FireCooldown" type="Timer" parent="."]
 process_mode = 0
+wait_time = 0.75
 
 [node name="Groundcheck" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0 )

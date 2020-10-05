@@ -23,6 +23,7 @@ func increment_open_counter():
 
 func open():
 	animation_player.play("Open")
+	$DoorOpenAudio.play()
 
 func on_open_animation_end():
 	door_mesh.visible = false

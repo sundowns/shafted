@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/skybox.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Target.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://MovingTarget.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ResetButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://meshes/sign.tscn" type="PackedScene" id=9]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 2 )
@@ -79,6 +81,13 @@ shape = SubResource( 7 )
 [node name="CollisionShape" type="CollisionShape" parent="Statics/Wall"]
 shape = SubResource( 8 )
 
+[node name="Door" parent="Statics" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7056, 1.74861, -15.6722 )
+count_to_open = 4
+
+[node name="ResetButton" parent="Statics" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.76484, 0.929397, -11.2225 )
+
 [node name="Projectiles" type="Node" parent="."]
 
 [node name="PortalPair" parent="." instance=ExtResource( 3 )]
@@ -127,10 +136,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 [node name="DestroyerPortal" parent="PortalPair5" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="Door" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7056, 1.74861, -15.6722 )
-count_to_open = 4
-
 [node name="Target" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.16251, -16.3328 )
 
@@ -149,10 +154,13 @@ curve = SubResource( 9 )
 
 [node name="PathFollow" parent="MovingTarget/Path" index="0"]
 move_speed = 3.0
-[connection signal="target_hit" from="Target" to="Door" method="increment_open_counter"]
-[connection signal="target_hit" from="Target2" to="Door" method="increment_open_counter"]
-[connection signal="target_hit" from="Target3" to="Door" method="increment_open_counter"]
-[connection signal="target_hit" from="MovingTarget/Path/PathFollow/Target" to="Door" method="increment_open_counter"]
+
+[node name="sign" parent="." instance=ExtResource( 9 )]
+transform = Transform( 0.852713, 0, 0.52238, 0, 1, 0, -0.52238, 0, 0.852713, 5.59098, 1.4616, -11.9748 )
+[connection signal="target_hit" from="Target" to="Statics/Door" method="increment_open_counter"]
+[connection signal="target_hit" from="Target2" to="Statics/Door" method="increment_open_counter"]
+[connection signal="target_hit" from="Target3" to="Statics/Door" method="increment_open_counter"]
+[connection signal="target_hit" from="MovingTarget/Path/PathFollow/Target" to="Statics/Door" method="increment_open_counter"]
 
 [editable path="PortalPair"]
 

@@ -1,17 +1,15 @@
 [gd_resource type="SpatialMaterial" load_steps=3 format=2]
 
 [sub_resource type="OpenSimplexNoise" id=1]
+period = 0.1
+persistence = 1.0
 
 [sub_resource type="NoiseTexture" id=2]
-width = 64
-height = 64
+width = 32
+height = 32
 seamless = true
 noise = SubResource( 1 )
 
 [resource]
+albedo_color = Color( 0.337255, 0.164706, 0.0745098, 1 )
 albedo_texture = SubResource( 2 )
-emission_enabled = true
-emission = Color( 0.878431, 0.513726, 0, 1 )
-emission_energy = 2.0
-emission_operator = 0
-emission_on_uv2 = false

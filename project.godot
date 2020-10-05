@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://DestroyerPortal.gd"
 }, {
+"base": "Area",
+"class": "Interactable",
+"language": "GDScript",
+"path": "res://Interactable.gd"
+}, {
 "base": "Spatial",
 "class": "SpawnerPortal",
 "language": "GDScript",
@@ -27,6 +32,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Arrow": "",
 "DestroyerPortal": "",
+"Interactable": "",
 "SpawnerPortal": ""
 }
 
@@ -84,6 +90,11 @@ crouch={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
 }
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -91,6 +102,7 @@ crouch={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Projectile"
 3d_physics/layer_4="Enemy"
+3d_physics/layer_5="Interactable"
 
 [rendering]
 

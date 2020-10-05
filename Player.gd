@@ -14,11 +14,13 @@ export(float) var aerial_speed: float = 14
 export(float) var aerial_acceleration: float = 2
 export(float) var aerial_drag: float = 8
 export(float) var gravity: float = 12
+export(float) var crouching_speed_modifier: float = 0.6
 
 onready var camera: Camera = $Head/Camera
 onready var head: Spatial = $Head
 onready var skybox_cast: RayCast = $Head/SkyboxCast
 onready var push_cast: RayCast = $Head/PushCast
+onready var interact_cast: RayCast = $Head/InteractCast
 onready var fire_timer: Timer = $FireTimer
 
 const highlight_material = preload("res://materials/push_highlight.tres")
@@ -31,6 +33,7 @@ var direction := Vector3.ZERO
 var state = PlayerState.IDLE
 var is_firing: bool = false
 var head_position: Vector3 = Vector3.ZERO
+var is_crouching: bool = false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -51,9 +54,10 @@ func _physics_process(delta):
 			move_state(delta)
 		PlayerState.AIRBORNE:
 			airborne_state(delta)
-	apply_movement()
-	handle_push()
 	handle_crouching()
+	apply_movement()
+	handle_interaction()
+	handle_push()
 
 func set_state(new_state):
 	if state == new_state:
@@ -105,7 +109,12 @@ func grounded_movement(delta):
 		direction += transform.basis.x
 
 	direction = direction.normalized()
-	velocity = velocity.linear_interpolate(direction * ground_speed, ground_acceleration * delta)
+	var effective_ground_accel = ground_acceleration
+	var effectve_ground_speed = ground_speed
+	if is_crouching:
+		effectve_ground_speed = effectve_ground_speed * crouching_speed_modifier
+		effective_ground_accel = effective_ground_accel * crouching_speed_modifier
+	velocity = velocity.linear_interpolate(direction * effectve_ground_speed, effective_ground_accel * delta)
 	if abs(velocity.x) > 4 or abs(velocity.z) > 4: 
 		AudioManager.playFootstep()
 
@@ -167,9 +176,22 @@ func handle_push():
 
 func handle_crouching():
 	if Input.is_action_pressed("crouch"):
+		is_crouching = true
 		head.transform.origin = head_position + Vector3(0, crouch_offset, 0)
 	else:
+		is_crouching = false
 		head.transform.origin = head_position
+
+func handle_interaction():
+	if interact_cast.is_colliding():
+		var collider = interact_cast.get_collider()
+		if collider is Interactable:
+			var interactable_object = collider.parent
+			if interactable_object == null:
+				return
+			interactable_object.highlight(highlight_material)
+			if Input.is_action_just_pressed("interact"):
+				interactable_object.activate()
 
 func _on_FireTimer_timeout():
 	is_firing = false

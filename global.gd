@@ -1,18 +1,20 @@
 extends Node
 
 var levels: Array = [
-	"test1.tscn",
-	"test1.tscn"
+	"level1.tscn",
+	"test.tscn"
 ]
 
 var current_level_index = 0
 
-
 func start_game():
-	# TODO: call this from menu start button
 	var first_level_name = "res://levels/%s" % levels[current_level_index]
 	get_tree().change_scene("res://Game.tscn")
-	append_level_scene(first_level_name)
+	call_deferred("append_level_scene", first_level_name)
+
+func restart_level():
+	get_tree().reload_current_scene()
+	call_deferred("append_level_scene", "res://levels/%s" % levels[current_level_index])
 
 func load_next_level():
 	current_level_index += 1
@@ -36,6 +38,4 @@ func append_level_scene(level_name: String):
 	root.add_child(next_level, true)
 
 func all_levels_complete():
-	print("thanks for playing!!!")
-	get_tree().quit()
-#	get_tree().change_scene("res://UI/GameComplete.tscn")
+	get_tree().change_scene("res://ui/ThanksForPlaying.tscn")

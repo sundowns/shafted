@@ -1,21 +1,21 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/skybox.png" type="Texture" id=2]
-[ext_resource path="res://PortalPair.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Skybox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/skybox.png" type="Texture" id=1]
+[ext_resource path="res://assets/signs/push_text.tres" type="Material" id=2]
+[ext_resource path="res://assets/signs/break_text.tres" type="Material" id=3]
+[ext_resource path="res://PortalPair.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Target.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Door.tscn" type="PackedScene" id=6]
-[ext_resource path="res://MovingTarget.tscn" type="PackedScene" id=7]
-[ext_resource path="res://ResetButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://meshes/sign.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/signs/push_text.tres" type="Material" id=10]
-[ext_resource path="res://assets/signs/break_text.tres" type="Material" id=11]
-[ext_resource path="res://LevelCompleteZone.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Floor.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Floor.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Door.tscn" type="PackedScene" id=7]
+[ext_resource path="res://meshes/sign.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ResetButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://MovingTarget.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Skybox.tscn" type="PackedScene" id=12]
+[ext_resource path="res://LevelCompleteZone.tscn" type="PackedScene" id=13]
 
 [sub_resource type="PanoramaSky" id=1]
-panorama = ExtResource( 2 )
+panorama = ExtResource( 1 )
 
 [sub_resource type="Environment" id=2]
 background_mode = 2
@@ -40,25 +40,25 @@ _data = {
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
+[node name="Player" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.7405, 0, 0.672057, 0, 1, 0, -0.672057, 0, 0.7405, 6.74694, 1.39189, 4.7639 )
 
 [node name="Statics" type="Node" parent="."]
 
-[node name="Skybox" parent="Statics" instance=ExtResource( 4 )]
+[node name="Skybox" parent="Statics" instance=ExtResource( 12 )]
 
-[node name="Door" parent="Statics" instance=ExtResource( 6 )]
+[node name="Door" parent="Statics" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7056, 1.74861, -15.6722 )
 count_to_open = 4
 
-[node name="ResetButton" parent="Statics" instance=ExtResource( 8 )]
+[node name="ResetButton" parent="Statics" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.76484, 0.929397, -11.2225 )
 
-[node name="Floor" parent="Statics" instance=ExtResource( 13 )]
+[node name="Floor" parent="Statics" instance=ExtResource( 6 )]
 
 [node name="Projectiles" type="Node" parent="."]
 
-[node name="PortalPair" parent="." instance=ExtResource( 3 )]
+[node name="PortalPair" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -4.81934 )
 arrow_count = 6
 
@@ -68,7 +68,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0 )
 [node name="DestroyerPortal" parent="PortalPair" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0 )
 
-[node name="PortalPair2" parent="." instance=ExtResource( 3 )]
+[node name="PortalPair2" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 0, 7, 1.391 )
 
 [node name="SpawnerPortal" parent="PortalPair2" index="0"]
@@ -77,7 +77,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 [node name="DestroyerPortal" parent="PortalPair2" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="PortalPair3" parent="." instance=ExtResource( 3 )]
+[node name="PortalPair3" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.588, 2, 1.391 )
 
 [node name="SpawnerPortal" parent="PortalPair3" index="0"]
@@ -86,7 +86,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 [node name="DestroyerPortal" parent="PortalPair3" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="PortalPair4" parent="." instance=ExtResource( 3 )]
+[node name="PortalPair4" parent="." instance=ExtResource( 4 )]
 transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -3.588, 2, -14.2139 )
 
 [node name="SpawnerPortal" parent="PortalPair4" index="0"]
@@ -95,7 +95,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 [node name="DestroyerPortal" parent="PortalPair4" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="PortalPair5" parent="." instance=ExtResource( 3 )]
+[node name="PortalPair5" parent="." instance=ExtResource( 4 )]
 transform = Transform( 0.272976, -0.835059, 0.477661, 0.406345, -0.349968, -0.844042, 0.871991, 0.424498, 0.243789, -1.74445, 3.96144, 11.8596 )
 
 [node name="SpawnerPortal" parent="PortalPair5" index="0"]
@@ -113,7 +113,7 @@ transform = Transform( 0.724268, 0, 0.689518, 0, 1, 0, -0.689518, 0, 0.724268, -
 [node name="Target3" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.700698, 0, -0.713458, 0, 1, 0, 0.713458, 0, 0.700698, 15.4233, 5.33008, -26.5194 )
 
-[node name="MovingTarget" parent="." instance=ExtResource( 7 )]
+[node name="MovingTarget" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.59063, 6.74643, -8.0373 )
 
 [node name="Path" parent="MovingTarget" index="0"]
@@ -123,22 +123,22 @@ curve = SubResource( 3 )
 [node name="PathFollow" parent="MovingTarget/Path" index="0"]
 move_speed = 3.0
 
-[node name="resetsign" parent="." instance=ExtResource( 9 )]
+[node name="resetsign" parent="." instance=ExtResource( 8 )]
 transform = Transform( 0.852713, 0, 0.52238, 0, 1, 0, -0.52238, 0, 0.852713, 5.59098, 1.4616, -11.9748 )
 
-[node name="pushsign" parent="." instance=ExtResource( 9 )]
+[node name="pushsign" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35854, 1.4616, -1.85755 )
 
 [node name="Sign" parent="pushsign" index="0"]
-material/2 = ExtResource( 10 )
+material/2 = ExtResource( 2 )
 
-[node name="breaksign" parent="." instance=ExtResource( 9 )]
+[node name="breaksign" parent="." instance=ExtResource( 8 )]
 transform = Transform( 0.788709, 0, 0.614767, 0, 1, 0, -0.614767, 0, 0.788709, -4.0329, 1.4616, -10.1481 )
 
 [node name="Sign" parent="breaksign" index="0"]
-material/2 = ExtResource( 11 )
+material/2 = ExtResource( 3 )
 
-[node name="LevelCompleteZone" parent="." instance=ExtResource( 12 )]
+[node name="LevelCompleteZone" parent="." instance=ExtResource( 13 )]
 transform = Transform( -1.62921e-07, 0, 0.5, 0, 1, 0, -1, 0, -8.14603e-08, 11.7062, 1.73352, -17.07 )
 [connection signal="target_hit" from="Target" to="Statics/Door" method="increment_open_counter"]
 [connection signal="target_hit" from="Target2" to="Statics/Door" method="increment_open_counter"]

@@ -18,6 +18,7 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
+current = true
 
 [node name="SkyboxCast" type="RayCast" parent="Head"]
 enabled = true

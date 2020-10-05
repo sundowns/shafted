@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ludum-dare-47"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://ui/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -111,5 +111,6 @@ interact={
 
 [rendering]
 
+quality/filters/anisotropic_filter_level=8
 quality/filters/msaa=2
 environment/default_environment="res://levels/game_environment.tres"

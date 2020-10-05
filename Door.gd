@@ -30,6 +30,5 @@ func on_open_animation_end():
 	door_collider.disabled = true
 	emit_signal("opened")
 
-
 func _on_Target_target_hit():
-	pass # Replace with function body.
+	increment_open_counter()

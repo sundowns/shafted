@@ -4,7 +4,8 @@ extends StaticBody
 const open_material: Resource = preload("res://materials/open_door.tres")
 
 onready var door_collider: CollisionShape = $DoorCollisionShape
-onready var mesh_instance: MeshInstance = $MeshInstance
+onready var door_mesh: MeshInstance = $door/Door
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 export(int) var count_to_open = 1
 
@@ -21,6 +22,9 @@ func increment_open_counter():
 		open()
 
 func open():
+	animation_player.play("Open")
+
+func on_open_animation_end():
+	door_mesh.visible = false
 	door_collider.disabled = true
-	mesh_instance.material_override = open_material
 	emit_signal("opened")

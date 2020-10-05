@@ -24,14 +24,17 @@ onready var fire_timer: Timer = $FireTimer
 const highlight_material = preload("res://materials/push_highlight.tres")
 const mouse_sensitivity: float = 0.05
 const terminal_fall_velocity: float = -25.0
+const crouch_offset: float = -0.5
 
 var velocity := Vector3.ZERO
 var direction := Vector3.ZERO
 var state = PlayerState.IDLE
 var is_firing: bool = false
+var head_position: Vector3 = Vector3.ZERO
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	head_position = head.transform.origin
 
 func _input(event):
 	# Camera look
@@ -50,6 +53,7 @@ func _physics_process(delta):
 			airborne_state(delta)
 	apply_movement()
 	handle_push()
+	handle_crouching()
 
 func set_state(new_state):
 	if state == new_state:
@@ -160,6 +164,12 @@ func handle_push():
 				print("Warning: Tried to push a non-arrow projectile somehow...")
 			is_firing = false
 			fire_timer.stop()
+
+func handle_crouching():
+	if Input.is_action_pressed("crouch"):
+		head.transform.origin = head_position + Vector3(0, crouch_offset, 0)
+	else:
+		head.transform.origin = head_position
 
 func _on_FireTimer_timeout():
 	is_firing = false

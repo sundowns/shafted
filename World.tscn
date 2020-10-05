@@ -148,7 +148,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.7501 )
 curve = SubResource( 9 )
 
 [node name="PathFollow" parent="MovingTarget/Path" index="0"]
-move_speed = 10.0
+move_speed = 3.0
 [connection signal="target_hit" from="Target" to="Door" method="increment_open_counter"]
 [connection signal="target_hit" from="Target2" to="Door" method="increment_open_counter"]
 [connection signal="target_hit" from="Target3" to="Door" method="increment_open_counter"]

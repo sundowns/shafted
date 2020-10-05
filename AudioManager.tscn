@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/footstep2.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/audio/footstep.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/audio/targetbreak.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/gun.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/audio/gun2.wav" type="AudioStream" id=6]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource( 1 )
@@ -15,6 +17,14 @@ stream = ExtResource( 3 )
 
 [node name="Footstep2" type="AudioStreamPlayer" parent="Footsteps"]
 stream = ExtResource( 2 )
+
+[node name="Gunshots" type="Node" parent="."]
+
+[node name="Gunshot" type="AudioStreamPlayer" parent="Gunshots"]
+stream = ExtResource( 5 )
+
+[node name="Gunshot2" type="AudioStreamPlayer" parent="Gunshots"]
+stream = ExtResource( 6 )
 
 [node name="TargetBreak" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 4 )

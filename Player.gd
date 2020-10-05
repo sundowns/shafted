@@ -163,6 +163,7 @@ func handle_push():
 	if Input.is_action_just_pressed("fire"):
 		is_firing = true
 		fire_timer.start()
+		AudioManager.playGunshot()
 	
 	if push_cast.is_colliding():
 		var projectile = push_cast.get_collider()

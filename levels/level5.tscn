@@ -57,7 +57,7 @@ transform = Transform( 0.797963, 0, 0.602707, 0, 1, 0, -0.602707, 0, 0.797963, 0
 [node name="OuterWalls" parent="Statics" instance=ExtResource( 5 )]
 
 [node name="Wall3" parent="Statics/OuterWalls" index="2"]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 3.11665, 0, 0 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 7.70665, 0, 0 )
 
 [node name="ExitRoom" type="Spatial" parent="Statics"]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 1.92014, 0 )

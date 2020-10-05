@@ -19,6 +19,7 @@ onready var camera: Camera = $Head/Camera
 onready var head: Spatial = $Head
 onready var skybox_cast: RayCast = $Head/SkyboxCast
 onready var push_cast: RayCast = $Head/PushCast
+onready var audio = $PlayerAudioManager
 
 const highlight_material = preload("res://materials/push_highlight.tres")
 const mouse_sensitivity: float = 0.05
@@ -103,6 +104,8 @@ func grounded_movement(delta):
 
 	direction = direction.normalized()
 	velocity = velocity.linear_interpolate(direction * ground_speed, ground_acceleration * delta)
+	if abs(velocity.x) > 4 or abs(velocity.z) > 4: 
+		audio.playFootstep()
 
 func aerial_movement(delta):
 	direction = Vector3.ZERO

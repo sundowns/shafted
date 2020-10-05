@@ -84,7 +84,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.97838 )
 
 [node name="ExitRoom" type="Spatial" parent="Statics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -16.254 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93341, -16.8061 )
 
 [node name="Wall" parent="Statics/ExitRoom" instance=ExtResource( 15 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, -1.615, -0.055, 0 )
@@ -95,12 +95,45 @@ transform = Transform( 1, 0, 0, 0, 0.975, 0, 0, 0, 1, 0, -0.055, -2 )
 [node name="Wall3" parent="Statics/ExitRoom" instance=ExtResource( 15 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, 1.615, -0.055, 0 )
 
+[node name="Wall4" parent="Statics/ExitRoom" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, -4.5897e-08, -1, 0, 1.05, -4.37114e-08, -0.0132948, 2.23627, -0.18379 )
+
 [node name="Door" parent="Statics/ExitRoom" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.225, 1.725 )
 count_to_open = 2
 
 [node name="LevelCompleteZone" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
-transform = Transform( -3.25841e-07, 0, 1, 0, 1, 0, -2, 0, -1.62921e-07, 0, 0, 0 )
+transform = Transform( -3.25841e-07, 0, 1, 0, 1, 0, -2, 0, -1.62921e-07, 0, -0.225976, 0 )
+
+[node name="sign" type="Spatial" parent="Statics"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47561, 1.53301, -7.21467 )
+
+[node name="Sign" type="MeshInstance" parent="Statics/sign"]
+transform = Transform( -0.443473, 0, 0.230936, 0, 0.5, 0, -0.230936, 0, -0.443473, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 8 )
+material/1 = SubResource( 2 )
+material/2 = ExtResource( 9 )
+
+[node name="StaticBody" type="StaticBody" parent="Statics/sign/Sign"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Statics/sign/Sign/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="sign2" type="Spatial" parent="Statics"]
+transform = Transform( 0.194388, 0, 0.980925, 0, 1, 0, -0.980925, 0, 0.194388, -13.1448, 1.53301, -10.3653 )
+
+[node name="Sign" type="MeshInstance" parent="Statics/sign2"]
+transform = Transform( -0.478614, 0, 0.144666, 0, 0.5, 0, -0.144666, 0, -0.478614, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 8 )
+material/1 = SubResource( 2 )
+material/2 = ExtResource( 13 )
+
+[node name="StaticBody" type="StaticBody" parent="Statics/sign2/Sign"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Statics/sign2/Sign/StaticBody"]
+shape = SubResource( 3 )
 
 [node name="PortalPair" parent="." instance=ExtResource( 7 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -7.952, 2, -8.551 )
@@ -109,36 +142,6 @@ is_unlimited = true
 [node name="PortalPair2" parent="." instance=ExtResource( 7 )]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 9.44, 2, -8.551 )
 is_unlimited = true
-
-[node name="sign" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47561, 1.53301, -7.21467 )
-
-[node name="Sign" type="MeshInstance" parent="sign"]
-transform = Transform( -0.443473, 0, 0.230936, 0, 0.5, 0, -0.230936, 0, -0.443473, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 8 )
-material/1 = SubResource( 2 )
-material/2 = ExtResource( 9 )
-
-[node name="StaticBody" type="StaticBody" parent="sign/Sign"]
-
-[node name="CollisionShape" type="CollisionShape" parent="sign/Sign/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="sign2" type="Spatial" parent="."]
-transform = Transform( 0.194388, 0, 0.980925, 0, 1, 0, -0.980925, 0, 0.194388, -13.1448, 1.53301, -10.3653 )
-
-[node name="Sign" type="MeshInstance" parent="sign2"]
-transform = Transform( -0.478614, 0, 0.144666, 0, 0.5, 0, -0.144666, 0, -0.478614, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 8 )
-material/1 = SubResource( 2 )
-material/2 = ExtResource( 13 )
-
-[node name="StaticBody" type="StaticBody" parent="sign2/Sign"]
-
-[node name="CollisionShape" type="CollisionShape" parent="sign2/Sign/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="Target" parent="." instance=ExtResource( 14 )]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 15.4183, 2.13433, -15.3995 )

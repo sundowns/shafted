@@ -35,6 +35,14 @@ cast_to = Vector3( 0, 0, -3 )
 collision_mask = 21
 collide_with_areas = true
 
-[node name="FireTimer" type="Timer" parent="."]
+[node name="FireBufferTimer" type="Timer" parent="."]
 process_mode = 0
-[connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]
+wait_time = 0.25
+
+[node name="FireCooldown" type="Timer" parent="."]
+
+[node name="Groundcheck" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0 )
+enabled = true
+[connection signal="timeout" from="FireBufferTimer" to="." method="_on_FireTimer_timeout"]
+[connection signal="timeout" from="FireCooldown" to="." method="_on_FireCooldown_timeout"]

@@ -70,6 +70,6 @@ func hit_target(destroy_after: float = 2.0):
 	expiry_timer.start(destroy_after)
 	hit_particles.emitting = true
 
-func _on_HeadContactArea_body_entered(body):
+func _on_HeadContactArea_body_entered(_body):
 	hit_target(5.0)
 	animation_player.stop()

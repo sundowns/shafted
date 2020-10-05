@@ -1,0 +1,157 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/skybox.png" type="Texture" id=2]
+[ext_resource path="res://Floor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Skybox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://OuterWalls.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/signs/limited_arrows_text.tres" type="Material" id=6]
+[ext_resource path="res://PortalPair.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Target.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Door.tscn" type="PackedScene" id=9]
+[ext_resource path="res://MovingTarget.tscn" type="PackedScene" id=10]
+[ext_resource path="res://meshes/sign.tscn" type="PackedScene" id=11]
+[ext_resource path="res://SmallCube.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Cube.tscn" type="PackedScene" id=13]
+[ext_resource path="res://LevelCompleteZone.tscn" type="PackedScene" id=14]
+[ext_resource path="res://2x1SmallCube.tscn" type="PackedScene" id=15]
+[ext_resource path="res://SmallWall.tscn" type="PackedScene" id=16]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 2 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0.619608, 0.619608, 0.619608, 0.584314 )
+fog_depth_begin = 4.0
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 1.0
+
+[sub_resource type="Curve3D" id=3]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -12.8513, 0.364025, -0.0196567, 0, 0, 0, 0, 0, 0, -12.9135, 5.27357, 0.0548673, 0, 0, 0, 0, 0, 0, -0.95033, 5.27357, 0.0548673, 0, 0, 0, 0, 0, 0, -0.981403, 0.301878, 0.051846, 0, 0, 0, 0, 0, 0, -12.8513, 0.364025, -0.0196567 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
+
+[node name="World" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8.85905 )
+
+[node name="Projectiles" type="Node" parent="."]
+
+[node name="Statics" type="Node" parent="."]
+
+[node name="Floor" parent="Statics" instance=ExtResource( 3 )]
+
+[node name="Skybox" parent="Statics" instance=ExtResource( 4 )]
+
+[node name="OuterWalls" parent="Statics" instance=ExtResource( 5 )]
+
+[node name="Wall" parent="Statics/OuterWalls" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.2209 )
+
+[node name="Wall4" parent="Statics/OuterWalls" index="3"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -20.1869, 0, 0 )
+
+[node name="sign" parent="Statics" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.04292, 0 )
+
+[node name="Sign" parent="Statics/sign" index="0"]
+transform = Transform( -0.427714, 0, 0.258961, 0, 0.5, 0, -0.258961, 0, -0.427714, 2.76198, -0.51346, 3.1884 )
+material/2 = ExtResource( 6 )
+
+[node name="ExitRoom" type="Spatial" parent="Statics"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.384079, 2.07327, -16.6 )
+
+[node name="Wall" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, -1.615, -0.055, 0 )
+
+[node name="Wall2" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 0.975, 0, 0, 0, 1, 0, -0.055, -2 )
+
+[node name="Wall3" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, 1.615, -0.055, 0 )
+
+[node name="Wall4" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, -4.5897e-08, -1, 0, 1.05, -4.37114e-08, -0.0132948, 2.23627, -0.18379 )
+
+[node name="Door" parent="Statics/ExitRoom" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.225, 1.725 )
+count_to_open = 2
+
+[node name="LevelCompleteZone" parent="Statics/ExitRoom" instance=ExtResource( 14 )]
+transform = Transform( -3.25841e-07, 0, 1, 0, 1, 0, -2, 0, -1.62921e-07, 0, -0.225976, 0 )
+
+[node name="Cube" parent="Statics" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3552, 2.05634, -2.86794 )
+
+[node name="Cube2" parent="Statics" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3552, 2.05634, -6.85807 )
+
+[node name="Cube3" parent="Statics" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.355, 6, -6.858 )
+
+[node name="SmallCube3" parent="Statics" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2312, 0.655226, -0.142747 )
+
+[node name="SmallCube4" parent="Statics" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6092, 4.72726, -4.19176 )
+
+[node name="2x1SmallCube" parent="Statics" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.631, -0.0370677, -0.120002 )
+
+[node name="2x1SmallCube2" parent="Statics" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2053, 4.04476, -4.16251 )
+
+[node name="PortalPair" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28505, 0 )
+arrow_count = 2
+spawn_interval = 0.2
+
+[node name="SpawnerPortal" parent="PortalPair" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
+
+[node name="DestroyerPortal" parent="PortalPair" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
+
+[node name="MovingTarget" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.62331, 2.19108, -7.7886 )
+
+[node name="Path" parent="MovingTarget" index="0"]
+curve = SubResource( 3 )
+
+[node name="Target" parent="MovingTarget/Path/PathFollow" index="0"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="Target" parent="." instance=ExtResource( 8 )]
+transform = Transform( -0.565154, 0, -0.824985, 0, 1, 0, 0.824985, 0, -0.565154, 0, 9.92388, 0 )
+
+[node name="PortalPair2" parent="." instance=ExtResource( 7 )]
+transform = Transform( -0.376931, 0.207178, -0.902774, 0.590548, 0.804624, -0.0619152, 0.713566, -0.556469, -0.425636, -7.77962, 9.54341, -4.71753 )
+
+[node name="SpawnerPortal" parent="PortalPair2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+
+[node name="DestroyerPortal" parent="PortalPair2" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+[connection signal="target_hit" from="MovingTarget/Path/PathFollow/Target" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+
+[editable path="Statics/OuterWalls"]
+
+[editable path="Statics/sign"]
+
+[editable path="PortalPair"]
+
+[editable path="MovingTarget"]
+
+[editable path="PortalPair2"]

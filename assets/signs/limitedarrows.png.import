@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/crouch.png-59a45ecaceb86430a1947f61f0f31b9e.s3tc.stex"
-path.etc2="res://.import/crouch.png-59a45ecaceb86430a1947f61f0f31b9e.etc2.stex"
+path.s3tc="res://.import/limitedarrows.png-47fc1991c8e089eddd4f61de98a8221d.s3tc.stex"
+path.etc2="res://.import/limitedarrows.png-47fc1991c8e089eddd4f61de98a8221d.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/signs/crouch.png"
-dest_files=[ "res://.import/crouch.png-59a45ecaceb86430a1947f61f0f31b9e.s3tc.stex", "res://.import/crouch.png-59a45ecaceb86430a1947f61f0f31b9e.etc2.stex" ]
+source_file="res://assets/signs/limitedarrows.png"
+dest_files=[ "res://.import/limitedarrows.png-47fc1991c8e089eddd4f61de98a8221d.s3tc.stex", "res://.import/limitedarrows.png-47fc1991c8e089eddd4f61de98a8221d.etc2.stex" ]
 
 [params]
 

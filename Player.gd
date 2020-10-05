@@ -7,7 +7,7 @@ enum PlayerState {
 }
 
 # Player movement values
-export(float) var jump_force: float = 8 # Initial vertical impulse when jumping
+export(float) var jump_force: float = 10 # Initial vertical impulse when jumping
 export(float) var ground_speed: float = 10
 export(float) var ground_acceleration: float = 16
 export(float) var aerial_speed: float = 14
@@ -21,21 +21,29 @@ onready var head: Spatial = $Head
 onready var skybox_cast: RayCast = $Head/SkyboxCast
 onready var push_cast: RayCast = $Head/PushCast
 onready var interact_cast: RayCast = $Head/InteractCast
-onready var fire_timer: Timer = $FireTimer
+onready var fire_buffer_timer: Timer = $FireBufferTimer
+onready var fire_cooldown: Timer = $FireCooldown
+onready var ground_check: RayCast = $Groundcheck
 
 const highlight_material = preload("res://materials/push_highlight.tres")
 const mouse_sensitivity: float = 0.05
 const terminal_fall_velocity: float = -25.0
-const crouch_offset: float = -0.5
+const crouch_offset: float = -0.7
 
 var velocity := Vector3.ZERO
 var direction := Vector3.ZERO
 var state = PlayerState.IDLE
-var is_firing: bool = false
+var is_fire_buffered: bool = false
 var head_position: Vector3 = Vector3.ZERO
 var is_crouching: bool = false
+var can_shoot: bool = true
+
+signal fire_disabled
+signal fire_enabled
 
 func _ready():
+	connect("fire_disabled", get_tree().current_scene.get_node("HUD"), "_on_fire_disabled")
+	connect("fire_enabled", get_tree().current_scene.get_node("HUD"), "_on_fire_enabled")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	head_position = head.transform.origin
 
@@ -72,7 +80,7 @@ func idle_state(delta):
 	grounded_movement(delta)
 	handle_jump()
 	
-	if not is_on_floor():
+	if not is_on_floor() and not ground_check.is_colliding():
 		set_state(PlayerState.AIRBORNE)
 		return
 	if direction != Vector3.ZERO:
@@ -85,13 +93,13 @@ func move_state(delta):
 	if direction == Vector3.ZERO:
 		set_state(PlayerState.IDLE)
 		return
-	if not is_on_floor():
+	if not is_on_floor() and not ground_check.is_colliding():
 		set_state(PlayerState.AIRBORNE)
 
 func airborne_state(delta):
 	aerial_movement(delta)
 	handle_gravity(delta)
-	if is_on_floor():
+	if is_on_floor() or ground_check.is_colliding():
 		set_state(PlayerState.MOVE)
 		return
 
@@ -144,11 +152,11 @@ func apply_movement():
 		move_and_slide(velocity, Vector3.UP)
 
 func handle_jump():
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or ground_check.is_colliding()):
 		velocity.y = (Vector3.UP * jump_force).y
 
 func handle_gravity(delta):
-	if not is_on_floor():
+	if not is_on_floor() and not ground_check.is_colliding():
 		var modifier := 1.0
 		if velocity.y <= 0:
 			modifier = 1.5
@@ -160,23 +168,27 @@ func handle_ceiling_collision():
 		velocity.y = 0
 
 func handle_push():
-	if Input.is_action_just_pressed("fire"):
-		is_firing = true
-		fire_timer.start()
-		AudioManager.playGunshot()
+	if Input.is_action_just_pressed("fire") and can_shoot:
+		is_fire_buffered = true
+		fire_buffer_timer.start()
+		can_shoot = false
+		emit_signal("fire_disabled")
 	
 	if push_cast.is_colliding():
 		var projectile = push_cast.get_collider()
-		projectile.highlight(highlight_material)
+		if can_shoot:
+			projectile.highlight(highlight_material)
 		
-		if skybox_cast.is_colliding() and is_firing:
+		if skybox_cast.is_colliding() and is_fire_buffered:
 			var target_position = skybox_cast.get_collision_point()
 			if projectile is Arrow:
 				projectile.redirect(target_position, push_cast.get_collision_point())
 			else:
 				print("Warning: Tried to push a non-arrow projectile somehow...")
-			is_firing = false
-			fire_timer.stop()
+			is_fire_buffered = false
+			fire_buffer_timer.stop()
+			fire_cooldown.start()
+			AudioManager.playGunshot()
 
 func handle_crouching():
 	if Input.is_action_pressed("crouch"):
@@ -203,4 +215,8 @@ func handle_interaction():
 				interactable_object.activate()
 
 func _on_FireTimer_timeout():
-	is_firing = false
+	is_fire_buffered = false
+
+func _on_FireCooldown_timeout():
+	can_shoot = true
+	emit_signal("fire_enabled")

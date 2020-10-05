@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Target.tscn" type="PackedScene" id=1]
+[ext_resource path="res://MovingTargetPath.gd" type="Script" id=2]
+
+[node name="MovingTarget" type="Spatial"]
+
+[node name="Path" type="Path" parent="."]
+curve = null
+
+[node name="PathFollow" type="PathFollow" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00703096, -0.0105278, -0.0179735 )
+rotation_mode = 0
+script = ExtResource( 2 )
+
+[node name="Target" parent="Path/PathFollow" instance=ExtResource( 1 )]

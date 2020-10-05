@@ -29,3 +29,7 @@ func on_open_animation_end():
 	door_mesh.visible = false
 	door_collider.disabled = true
 	emit_signal("opened")
+
+
+func _on_Target_target_hit():
+	pass # Replace with function body.

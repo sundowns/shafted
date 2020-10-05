@@ -38,4 +38,8 @@ collide_with_areas = true
 [node name="FireTimer" type="Timer" parent="."]
 process_mode = 0
 wait_time = 0.3
+
+[node name="Groundcheck" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0 )
+enabled = true
 [connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]

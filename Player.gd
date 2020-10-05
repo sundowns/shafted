@@ -7,7 +7,7 @@ enum PlayerState {
 }
 
 # Player movement values
-export(float) var jump_force: float = 8 # Initial vertical impulse when jumping
+export(float) var jump_force: float = 10 # Initial vertical impulse when jumping
 export(float) var ground_speed: float = 10
 export(float) var ground_acceleration: float = 16
 export(float) var aerial_speed: float = 14
@@ -22,6 +22,7 @@ onready var skybox_cast: RayCast = $Head/SkyboxCast
 onready var push_cast: RayCast = $Head/PushCast
 onready var interact_cast: RayCast = $Head/InteractCast
 onready var fire_timer: Timer = $FireTimer
+onready var ground_check: RayCast = $Groundcheck
 
 const highlight_material = preload("res://materials/push_highlight.tres")
 const mouse_sensitivity: float = 0.05
@@ -72,7 +73,7 @@ func idle_state(delta):
 	grounded_movement(delta)
 	handle_jump()
 	
-	if not is_on_floor():
+	if not is_on_floor() and not ground_check.is_colliding():
 		set_state(PlayerState.AIRBORNE)
 		return
 	if direction != Vector3.ZERO:
@@ -85,13 +86,13 @@ func move_state(delta):
 	if direction == Vector3.ZERO:
 		set_state(PlayerState.IDLE)
 		return
-	if not is_on_floor():
+	if not is_on_floor() and not ground_check.is_colliding():
 		set_state(PlayerState.AIRBORNE)
 
 func airborne_state(delta):
 	aerial_movement(delta)
 	handle_gravity(delta)
-	if is_on_floor():
+	if is_on_floor() or ground_check.is_colliding():
 		set_state(PlayerState.MOVE)
 		return
 
@@ -141,11 +142,11 @@ func apply_movement():
 		move_and_slide(velocity, Vector3.UP)
 
 func handle_jump():
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or ground_check.is_colliding()):
 		velocity.y = (Vector3.UP * jump_force).y
 
 func handle_gravity(delta):
-	if not is_on_floor():
+	if not is_on_floor() and not ground_check.is_colliding():
 		var modifier := 1.0
 		if velocity.y <= 0:
 			modifier = 1.5

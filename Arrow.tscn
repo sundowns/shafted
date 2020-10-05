@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Arrow.gd" type="Script" id=1]
 [ext_resource path="res://meshes/arrow.tscn" type="PackedScene" id=2]
@@ -24,6 +24,38 @@ tracks/0/keys = {
 "values": [ Vector3( 0, -90, 0 ), Vector3( 90, -90, 0 ), Vector3( 180, -90, 0 ), Vector3( 270, -90, 0 ), Vector3( 360, -90, 0 ) ]
 }
 
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.378049, 0.994318 ), 0.0381205, 0.0381205, 0, 0, Vector2( 0.96748, 0 ), -0.235407, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_rotate_y = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+angular_velocity = 5.0
+angular_velocity_random = 1.0
+scale_curve = SubResource( 7 )
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_transparent = true
+albedo_color = Color( 1, 0.984314, 0, 0.568627 )
+emission_enabled = true
+emission = Color( 0.870588, 0.654902, 0, 1 )
+emission_energy = 1.5
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="PrismMesh" id=4]
+material = SubResource( 5 )
+size = Vector3( 0.1, 0.1, 0.1 )
+
+[sub_resource type="SphereShape" id=8]
+radius = 0.25
+
 [node name="Arrow" type="RigidBody"]
 collision_layer = 4
 collision_mask = 15
@@ -34,7 +66,7 @@ angular_damp = 0.0
 script = ExtResource( 1 )
 
 [node name="arrow" parent="." instance=ExtResource( 2 )]
-transform = Transform( -6.51683e-08, -0.148145, -0.371555, 0, 0.371555, -0.148145, 0.4, -2.41359e-08, -6.0534e-08, 0, 0, 0 )
+transform = Transform( -1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -51,6 +83,26 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Default = SubResource( 2 )
+
+[node name="HitParticles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.747061 )
+emitting = false
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 4 )
+
+[node name="HeadContactArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.843049 )
+collision_layer = 0
+collision_mask = 11
+
+[node name="CollisionShape" type="CollisionShape" parent="HeadContactArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0920548 )
+shape = SubResource( 8 )
 [connection signal="timeout" from="RedirectLockoutTimer" to="." method="_on_RedirectLockoutTimer_timeout"]
 [connection signal="timeout" from="HighlightFadeTimer" to="." method="remove_highlight"]
 [connection signal="timeout" from="ExpiryTimer" to="." method="_on_ExpiryTimer_timeout"]
+[connection signal="body_entered" from="HeadContactArea" to="." method="_on_HeadContactArea_body_entered"]

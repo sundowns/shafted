@@ -8,6 +8,7 @@ onready var redirect_lockout_timer: Timer = $RedirectLockoutTimer
 onready var highlight_fade_timer: Timer = $HighlightFadeTimer
 onready var expiry_timer: Timer = $ExpiryTimer
 onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var hit_particles: Particles = $HitParticles
 
 var can_redirect: bool = true
 
@@ -61,7 +62,12 @@ func _on_RedirectLockoutTimer_timeout():
 func _on_ExpiryTimer_timeout():
 	queue_free()
 
-func hit_target():
+func hit_target(destroy_after: float = 2.0):
 	gravity_scale = 1.0
 	expiry_timer.stop()
-	expiry_timer.start(2)
+	expiry_timer.start(destroy_after)
+	hit_particles.emitting = true
+
+func _on_HeadContactArea_body_entered(body):
+	hit_target(5.0)
+	animation_player.stop()

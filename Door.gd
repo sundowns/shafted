@@ -30,3 +30,7 @@ func on_open_animation_end():
 
 func _on_Target_target_hit():
 	increment_open_counter()
+
+
+func _on_Target4_target_hit():
+	pass # Replace with function body.

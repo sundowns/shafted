@@ -1,0 +1,263 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/skybox.png" type="Texture" id=2]
+[ext_resource path="res://Floor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Skybox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://OuterWalls.tscn" type="PackedScene" id=5]
+[ext_resource path="res://materials/level_complete_zone_final.tres" type="Material" id=6]
+[ext_resource path="res://CubeLShape.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/signs/unlimited_ammo_text.tres" type="Material" id=8]
+[ext_resource path="res://meshes/sign.tscn" type="PackedScene" id=9]
+[ext_resource path="res://PortalPair.tscn" type="PackedScene" id=10]
+[ext_resource path="res://DoubleWall.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/signs/mememonkey.png" type="Texture" id=12]
+[ext_resource path="res://assets/signs/mem2.tres" type="Material" id=13]
+[ext_resource path="res://CubeFamily.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Target.tscn" type="PackedScene" id=15]
+[ext_resource path="res://SmallWall.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Door.tscn" type="PackedScene" id=17]
+[ext_resource path="res://LevelCompleteZone.tscn" type="PackedScene" id=18]
+[ext_resource path="res://MovingTarget.tscn" type="PackedScene" id=19]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 2 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0.619608, 0.619608, 0.619608, 0.584314 )
+fog_depth_begin = 4.0
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 1.0
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_name = "SignText"
+flags_unshaded = true
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 12 )
+
+[sub_resource type="Curve3D" id=4]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -8.72292, 5.67303, 0.176334, 0, 0, 0, 0, 0, 0, -8.72292, -4.32217, 0.136353, 0, 0, 0, 0, 0, 0, 8.79268, 5.75299, 0.136353, 0, 0, 0, 0, 0, 0, 8.72412, -4.32217, 0.136353, 0, 0, 0, 0, 0, 0, -8.72292, 5.67303, 0.136353 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
+
+[node name="World" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.45065, 0 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.469507, 1.331 )
+
+[node name="Projectiles" type="Node" parent="."]
+
+[node name="Statics" type="Node" parent="."]
+
+[node name="Floor" parent="Statics" instance=ExtResource( 3 )]
+
+[node name="Skybox" parent="Statics" instance=ExtResource( 4 )]
+
+[node name="OuterWalls" parent="Statics" instance=ExtResource( 5 )]
+
+[node name="ExitRoom" type="Spatial" parent="Statics"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 1.989, 0 )
+
+[node name="Wall" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, -1.615, -0.055, 0 )
+
+[node name="Wall2" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 0.975, 0, 0, 0, 1, 0, -0.055, -2 )
+
+[node name="Wall3" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, 1.615, -0.055, 0 )
+
+[node name="Wall4" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, -4.5897e-08, -1, 0, 1.05, -4.37114e-08, -0.0132948, 2.23627, -0.18379 )
+
+[node name="Door" parent="Statics/ExitRoom" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.225, 1.725 )
+count_to_open = 16
+
+[node name="LevelCompleteZone" parent="Statics/ExitRoom" instance=ExtResource( 18 )]
+transform = Transform( -3.25841e-07, 0, 1, 0, 1, 0, -2, 0, -1.62921e-07, 0, -0.225976, 0 )
+
+[node name="MeshInstance" parent="Statics/ExitRoom/LevelCompleteZone" index="1"]
+material/0 = ExtResource( 6 )
+
+[node name="CubeLShape" parent="Statics" instance=ExtResource( 7 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -0.00422978, 0.720741, 3.09261 )
+
+[node name="sign" parent="Statics" instance=ExtResource( 9 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 1.55365, 6.17536, -1.46201 )
+
+[node name="Sign" parent="Statics/sign" index="0"]
+material/2 = ExtResource( 8 )
+
+[node name="DoubleWall" parent="Statics" instance=ExtResource( 11 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 14, 0, -14 )
+
+[node name="DoubleWall2" parent="Statics" instance=ExtResource( 11 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -14, 0, -14 )
+
+[node name="DoubleWall3" parent="Statics" instance=ExtResource( 11 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -14, 0, 14 )
+
+[node name="DoubleWall4" parent="Statics" instance=ExtResource( 11 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 14, 0, 14 )
+
+[node name="sign2" parent="Statics" instance=ExtResource( 9 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 2.08338, 1.33149, 0 )
+
+[node name="Sign" parent="Statics/sign2" index="0"]
+material/2 = ExtResource( 13 )
+
+[node name="sign3" parent="Statics" instance=ExtResource( 9 )]
+transform = Transform( 0.707107, 0.707107, -1.15202e-07, 0, -1.62921e-07, -1, -0.707107, 0.707107, -1.15202e-07, 15, 6.912, 15.105 )
+
+[node name="Sign" parent="Statics/sign3" index="0"]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, -1.42109e-14, -0.5, 0, 0, 0 )
+material/2 = SubResource( 3 )
+
+[node name="CubeFamily" parent="Statics" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6113, -0.284504, -18.1677 )
+
+[node name="CubeFamily2" parent="Statics" instance=ExtResource( 14 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -19.0498, -0.284504, 18.2651 )
+
+[node name="PortalPair" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 1.96687, -3.75958 )
+is_unlimited = true
+
+[node name="PortalPair2" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -3, 1.96687, 0 )
+is_unlimited = true
+
+[node name="PortalPair3" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 3, 1.96687, 0 )
+is_unlimited = true
+
+[node name="PortalPair8" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 3, 1.967, 3.76 )
+is_unlimited = true
+
+[node name="PortalPair9" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -3, 1.967, 3.76 )
+is_unlimited = true
+
+[node name="PortalPair4" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 3, 1.96687, -3.76 )
+is_unlimited = true
+
+[node name="PortalPair5" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -3, 1.96687, -3.76 )
+is_unlimited = true
+
+[node name="PortalPair6" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.022, -1.6, -16.117 )
+arrow_count = 0
+
+[node name="PortalPair7" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, -1.6, 16.383 )
+arrow_count = 0
+
+[node name="SpawnerPortal" parent="PortalPair7" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 0 )
+
+[node name="DestroyerPortal" parent="PortalPair7" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, 0, 0 )
+
+[node name="Target" parent="." instance=ExtResource( 15 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -16.978, -1.6, -15.5233 )
+
+[node name="MovingTarget" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85548, -17.6462 )
+
+[node name="Path" parent="MovingTarget" index="0"]
+curve = SubResource( 4 )
+
+[node name="MovingTarget2" parent="." instance=ExtResource( 19 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -17.6516, 2.855, 0 )
+
+[node name="Path" parent="MovingTarget2" index="0"]
+curve = SubResource( 4 )
+
+[node name="MovingTarget3" parent="." instance=ExtResource( 19 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 17.0365, 2.855, 0 )
+
+[node name="Path" parent="MovingTarget3" index="0"]
+curve = SubResource( 4 )
+
+[node name="Target2" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 17.9216, 8.54838, -17.796 )
+
+[node name="Target3" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 17.9216, 10.5493, -17.796 )
+
+[node name="Target4" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 17.9216, 6.35869, -17.796 )
+
+[node name="Target8" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -17.922, 8.54838, -17.796 )
+
+[node name="Target9" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -17.922, 10.5493, -17.796 )
+
+[node name="Target10" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -17.922, 6.35869, -17.796 )
+
+[node name="Target11" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -17.922, 8.54838, 17.796 )
+
+[node name="Target12" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -17.922, 10.5493, 17.796 )
+
+[node name="Target13" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -17.922, 6.35869, 17.796 )
+
+[node name="Target14" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 17.922, 8.54838, 17.796 )
+
+[node name="Target15" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 17.922, 10.5493, 17.796 )
+
+[node name="Target16" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 17.922, 6.35869, 17.796 )
+[connection signal="target_hit" from="Target" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="MovingTarget/Path/PathFollow/Target" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="MovingTarget2/Path/PathFollow/Target" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="MovingTarget3/Path/PathFollow/Target" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target2" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target3" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target4" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target8" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target9" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target10" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target11" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target12" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target13" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target14" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target15" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target16" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+
+[editable path="Statics/ExitRoom/LevelCompleteZone"]
+
+[editable path="Statics/sign"]
+
+[editable path="Statics/sign2"]
+
+[editable path="Statics/sign3"]
+
+[editable path="PortalPair7"]
+
+[editable path="MovingTarget"]
+
+[editable path="MovingTarget2"]
+
+[editable path="MovingTarget3"]

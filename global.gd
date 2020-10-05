@@ -1,13 +1,14 @@
 extends Node
 
 var levels: Array = [
-	"level7.tscn",
 	"level1.tscn",
 	"level2.tscn",
 	"level3.tscn",
 	"level4.tscn",
 	"level5.tscn",
-	"level6.tscn"
+	"level6.tscn",
+	"level7.tscn",
+	"level8.tscn"
 ]
 
 var current_level_index = 0

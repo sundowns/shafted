@@ -7,11 +7,13 @@ onready var mesh: MeshInstance = $arrow/Arrow
 onready var redirect_lockout_timer: Timer = $RedirectLockoutTimer
 onready var highlight_fade_timer: Timer = $HighlightFadeTimer
 onready var expiry_timer: Timer = $ExpiryTimer
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var can_redirect: bool = true
 
 func _ready():
 	set_as_toplevel(true)
+	animation_player.play("Default")
 	
 func apply_impulse_towards_position(position: Vector3):
 	# reset velocity before pushing

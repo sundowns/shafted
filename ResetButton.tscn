@@ -5,6 +5,8 @@
 [ext_resource path="res://ResetButton.gd" type="Script" id=3]
 [ext_resource path="res://materials/button_base.tres" type="Material" id=4]
 
+
+
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.205368, 0.0614471, 0.187499 )
 

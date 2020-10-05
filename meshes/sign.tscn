@@ -4,6 +4,8 @@
 [ext_resource path="res://assets/sign.glb" type="PackedScene" id=2]
 [ext_resource path="res://materials/sign_base.tres" type="Material" id=3]
 
+
+
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0, 0, 0, 1 )
 

@@ -80,6 +80,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="OuterWalls" parent="Statics" instance=ExtResource( 5 )]
 
+[node name="Wall" parent="Statics/OuterWalls" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.97838 )
+
 [node name="ExitRoom" type="Spatial" parent="Statics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -16.254 )
 
@@ -144,3 +147,5 @@ transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 1
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -13.6547, 2.13433, -15.4812 )
 [connection signal="target_hit" from="Target" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
 [connection signal="target_hit" from="Target2" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+
+[editable path="Statics/OuterWalls"]

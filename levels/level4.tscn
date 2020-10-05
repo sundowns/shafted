@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/skybox.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Cube.tscn" type="PackedScene" id=11]
 [ext_resource path="res://LevelCompleteZone.tscn" type="PackedScene" id=12]
 [ext_resource path="res://SmallWall.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/signs/meme3.tres" type="Material" id=14]
+[ext_resource path="res://meshes/sign.tscn" type="PackedScene" id=15]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 2 )
@@ -29,7 +31,7 @@ tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 1.0
 
-[sub_resource type="Curve3D" id=3]
+[sub_resource type="Curve3D" id=4]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.0517311, 6.36016, -13.2838, 0, 0, 0, 0, 0, 0, 26.9583, -3.7548, -13.2838, 0, 0, 0, 0, 0, 0, 27.0383, 6.20024, -13.2838, 0, 0, 0, 0, 0, 0, 0.0278816, -3.82804, -13.2838, 0, 0, 0, 0, 0, 0, 0.0517311, 6.36016, -13.2838 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0 )
@@ -61,6 +63,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91832, 7.06427 )
 
 [node name="ResetSignButtonPair" parent="Statics/Cube" instance=ExtResource( 9 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0.847556, 2.09892, 0.856861 )
+
+[node name="sign2" parent="Statics/Cube/ResetSignButtonPair" index="0"]
+transform = Transform( 0.852613, 0, 0.522543, 0, 1, 0, -0.522543, 0, 0.852613, -0.172914, 1.5, 0 )
+
+[node name="ResetButton" parent="Statics/Cube/ResetSignButtonPair" index="1"]
+transform = Transform( 0.930193, 0, 0.36707, 0, 1, 0, -0.36707, 0, 0.930193, 2.11736, 0.8, -0.260753 )
+
+[node name="sign" parent="Statics" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48755, 10.8222 )
+
+[node name="Sign" parent="Statics/sign" index="0"]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0, 0, 0.654613 )
+material/2 = ExtResource( 14 )
 
 [node name="ExitRoom" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95374, -16.7749 )
@@ -97,7 +112,7 @@ transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 7.54
 
 [node name="Path" parent="MovingTarget" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-06, 0, 28.5642 )
-curve = SubResource( 3 )
+curve = SubResource( 4 )
 
 [node name="PathFollow" parent="MovingTarget/Path" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -111,7 +126,7 @@ transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -30.560
 
 [node name="Path" parent="MovingTarget2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-06, 0, 28.5642 )
-curve = SubResource( 3 )
+curve = SubResource( 4 )
 
 [node name="PathFollow" parent="MovingTarget2/Path" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -121,6 +136,10 @@ move_speed = 6.0
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 [connection signal="target_hit" from="MovingTarget/Path/PathFollow/Target" to="ExitRoom/Door" method="_on_Target_target_hit"]
 [connection signal="target_hit" from="MovingTarget2/Path/PathFollow/Target" to="ExitRoom/Door" method="_on_Target_target_hit"]
+
+[editable path="Statics/Cube/ResetSignButtonPair"]
+
+[editable path="Statics/sign"]
 
 [editable path="PortalPair"]
 

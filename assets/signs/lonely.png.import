@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/meme1.png-09bccf2d6d607b19ed756ec16a055e71.s3tc.stex"
-path.etc2="res://.import/meme1.png-09bccf2d6d607b19ed756ec16a055e71.etc2.stex"
+path.s3tc="res://.import/lonely.png-fbc4cb3e6f1f0b144fed43379409103d.s3tc.stex"
+path.etc2="res://.import/lonely.png-fbc4cb3e6f1f0b144fed43379409103d.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/signs/meme1.png"
-dest_files=[ "res://.import/meme1.png-09bccf2d6d607b19ed756ec16a055e71.s3tc.stex", "res://.import/meme1.png-09bccf2d6d607b19ed756ec16a055e71.etc2.stex" ]
+source_file="res://assets/signs/lonely.png"
+dest_files=[ "res://.import/lonely.png-fbc4cb3e6f1f0b144fed43379409103d.s3tc.stex", "res://.import/lonely.png-fbc4cb3e6f1f0b144fed43379409103d.etc2.stex" ]
 
 [params]
 

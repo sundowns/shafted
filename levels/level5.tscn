@@ -57,7 +57,7 @@ transform = Transform( 0.797963, 0, 0.602707, 0, 1, 0, -0.602707, 0, 0.797963, 0
 [node name="OuterWalls" parent="Statics" instance=ExtResource( 5 )]
 
 [node name="Wall3" parent="Statics/OuterWalls" index="2"]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 7.40131, 0, 0 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 3.11665, 0, 0 )
 
 [node name="ExitRoom" type="Spatial" parent="Statics"]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 1.92014, 0 )
@@ -96,12 +96,6 @@ transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -12.548
 
 [node name="CubeFamily2" parent="Statics" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.56156, 3.57487, -9.67991 )
-
-[node name="2x1SmallCube" parent="Statics/CubeFamily2/Cube" index="2"]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -2.68959, -1.92055, 0.0181189 )
-
-[node name="SmallCube" parent="Statics/CubeFamily2/Cube" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68763, -1.2134, -1.25799 )
 
 [node name="ResetSignButtonPair" parent="Statics" instance=ExtResource( 15 )]
 transform = Transform( -0.920396, 0, -0.390988, 0, 1, 0, 0.390988, 0, -0.920396, -1.61777, 0, 3.5291 )

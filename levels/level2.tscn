@@ -1,10 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/skybox.png" type="Texture" id=2]
 [ext_resource path="res://Floor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Skybox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://OuterWalls.tscn" type="PackedScene" id=5]
+[ext_resource path="res://SmallWall.tscn" type="PackedScene" id=6]
+[ext_resource path="res://PortalPair.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Target.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Door.tscn" type="PackedScene" id=9]
+[ext_resource path="res://LevelCompleteZone.tscn" type="PackedScene" id=10]
+[ext_resource path="res://meshes/sign.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/signs/crouch_text.tres" type="Material" id=12]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 2 )
@@ -27,7 +34,7 @@ glow_intensity = 1.0
 environment = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+transform = Transform( 0.547534, 0, 0.836783, 0, 1, 0, -0.836783, 0, 0.547534, 13.1819, 2, 4.071 )
 
 [node name="Projectiles" type="Node" parent="."]
 
@@ -38,3 +45,58 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 [node name="Skybox" parent="Statics" instance=ExtResource( 4 )]
 
 [node name="OuterWalls" parent="Statics" instance=ExtResource( 5 )]
+
+[node name="Wall" parent="Statics/OuterWalls" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.8004 )
+
+[node name="Wall3" parent="Statics/OuterWalls" index="2"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 16.9555, 0, 0 )
+
+[node name="ExitRoom" type="Spatial" parent="Statics"]
+transform = Transform( 0.525071, 0, 0.851059, 0, 1, 0, -0.851059, 0, 0.525071, -16.9431, 1.81106, -16.8343 )
+
+[node name="Wall" parent="Statics/ExitRoom" instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, -1.615, -0.055, 0 )
+
+[node name="Wall2" parent="Statics/ExitRoom" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.975, 0, 0, 0, 1, 0, -0.055, -2 )
+
+[node name="Wall3" parent="Statics/ExitRoom" instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, 1.615, -0.055, 0 )
+
+[node name="Wall4" parent="Statics/ExitRoom" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, -4.5897e-08, -1, 0, 1.05, -4.37114e-08, -0.0132948, 2.23627, -0.18379 )
+
+[node name="Door" parent="Statics/ExitRoom" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.225, 1.725 )
+count_to_open = 3
+
+[node name="LevelCompleteZone" parent="Statics/ExitRoom" instance=ExtResource( 10 )]
+transform = Transform( -3.25841e-07, 0, 1, 0, 1, 0, -2, 0, -1.62921e-07, 0, -0.225976, 0 )
+
+[node name="PortalPair" parent="." instance=ExtResource( 7 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 2.25, -3.378 )
+is_unlimited = true
+
+[node name="Target" parent="." instance=ExtResource( 8 )]
+transform = Transform( -3.25841e-07, 0, 2, 0, 2, 0, -2, 0, -3.25841e-07, -15.855, 12.5, -3.75 )
+
+[node name="Target2" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1.18402, 0.935465, 1.31263, 0.0770208, 1.59402, -1.20547, -1.61002, 0.764204, 0.907651, -17.7469, 13.4559, -17.1133 )
+
+[node name="Target3" parent="." instance=ExtResource( 8 )]
+transform = Transform( -1.18716, 1.00695, 1.25566, 0.0770208, 1.59402, -1.20547, -1.6077, -0.667191, -0.984958, -16.9961, 13.4559, 7.84192 )
+
+[node name="sign" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.844431, 0, 0.535665, 0, 1, 0, -0.535665, 0, 0.844431, 7, 2, -6 )
+
+[node name="Sign" parent="sign" index="0"]
+transform = Transform( -0.458506, 0, -0.199431, 0, 0.5, 0, 0.199431, 0, -0.458506, -10.1403, -0.434664, -6.43247 )
+material/2 = ExtResource( 12 )
+[connection signal="target_hit" from="Target" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target2" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="Target3" to="Statics/ExitRoom/Door" method="_on_Target_target_hit"]
+
+[editable path="Statics/OuterWalls"]
+
+[editable path="sign"]

@@ -3,13 +3,11 @@
 [ext_resource path="res://LevelCompleteZone.gd" type="Script" id=1]
 [ext_resource path="res://materials/level_complete_zone.tres" type="Material" id=2]
 
-
-
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.5, 1, 1 )
+extents = Vector3( 0.5, 1.5, 1 )
 
 [sub_resource type="CubeMesh" id=2]
-size = Vector3( 1, 2, 2 )
+size = Vector3( 1, 3.5, 2 )
 
 [node name="LevelCompleteZone" type="Area"]
 monitorable = false

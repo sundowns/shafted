@@ -26,7 +26,7 @@ onready var fire_timer: Timer = $FireTimer
 const highlight_material = preload("res://materials/push_highlight.tres")
 const mouse_sensitivity: float = 0.05
 const terminal_fall_velocity: float = -25.0
-const crouch_offset: float = -0.5
+const crouch_offset: float = -0.7
 
 var velocity := Vector3.ZERO
 var direction := Vector3.ZERO

@@ -84,7 +84,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.97838 )
 
 [node name="ExitRoom" type="Spatial" parent="Statics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -16.254 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93341, -16.8061 )
 
 [node name="Wall" parent="Statics/ExitRoom" instance=ExtResource( 15 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, -1.615, -0.055, 0 )
@@ -95,12 +95,15 @@ transform = Transform( 1, 0, 0, 0, 0.975, 0, 0, 0, 1, 0, -0.055, -2 )
 [node name="Wall3" parent="Statics/ExitRoom" instance=ExtResource( 15 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, 1.615, -0.055, 0 )
 
+[node name="Wall4" parent="Statics/ExitRoom" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, -4.5897e-08, -1, 0, 1.05, -4.37114e-08, -0.0132948, 2.23627, -0.18379 )
+
 [node name="Door" parent="Statics/ExitRoom" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.225, 1.725 )
 count_to_open = 2
 
 [node name="LevelCompleteZone" parent="Statics/ExitRoom" instance=ExtResource( 16 )]
-transform = Transform( -3.25841e-07, 0, 1, 0, 1, 0, -2, 0, -1.62921e-07, 0, 0, 0 )
+transform = Transform( -3.25841e-07, 0, 1, 0, 1, 0, -2, 0, -1.62921e-07, 0, -0.225976, 0 )
 
 [node name="PortalPair" parent="." instance=ExtResource( 7 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -7.952, 2, -8.551 )

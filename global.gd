@@ -1,6 +1,7 @@
 extends Node
 
 var levels: Array = [
+	"level6.tscn",
 	"level1.tscn",
 	"level2.tscn",
 	"level3.tscn",

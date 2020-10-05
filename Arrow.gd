@@ -29,6 +29,7 @@ func set_orientation(target_position: Vector3):
 	# Woke maths gaming
 	var dot_product_to_up = to_target.dot(Vector3.UP)
 	if abs(dot_product_to_up) == 1:
+		print('up!')
 		global_rotate(Vector3(1.0, 0, 0), deg2rad(90 * sign(dot_product_to_up)))
 	else:
 		look_at(target_position, Vector3.UP)

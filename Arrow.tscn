@@ -24,13 +24,13 @@ tracks/0/keys = {
 "values": [ Vector3( 0, -90, 0 ), Vector3( 90, -90, 0 ), Vector3( 180, -90, 0 ), Vector3( 270, -90, 0 ), Vector3( 360, -90, 0 ) ]
 }
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.378049, 0.994318 ), 0.0381205, 0.0381205, 0, 0, Vector2( 0.96748, 0 ), -0.235407, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=7]
-curve = SubResource( 6 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=5]
 flag_rotate_y = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
@@ -38,9 +38,9 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
 angular_velocity = 5.0
 angular_velocity_random = 1.0
-scale_curve = SubResource( 7 )
+scale_curve = SubResource( 4 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=6]
 flags_transparent = true
 albedo_color = Color( 1, 0.984314, 0, 0.568627 )
 emission_enabled = true
@@ -49,8 +49,8 @@ emission_energy = 1.5
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="PrismMesh" id=4]
-material = SubResource( 5 )
+[sub_resource type="PrismMesh" id=7]
+material = SubResource( 6 )
 size = Vector3( 0.1, 0.1, 0.1 )
 
 [sub_resource type="SphereShape" id=8]
@@ -91,8 +91,8 @@ one_shot = true
 speed_scale = 3.0
 explosiveness = 1.0
 local_coords = false
-process_material = SubResource( 3 )
-draw_pass_1 = SubResource( 4 )
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 7 )
 
 [node name="HeadContactArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.843049 )

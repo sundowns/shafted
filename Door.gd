@@ -14,8 +14,6 @@ var is_open: bool = false
 
 signal opened
 
-# TODO: create a static frame collider from the blender mesh
-
 func increment_open_counter():
 	current_count += 1
 	if current_count >= count_to_open:

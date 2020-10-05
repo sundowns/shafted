@@ -168,11 +168,9 @@ func handle_ceiling_collision():
 		velocity.y = 0
 
 func handle_push():
-	if Input.is_action_just_pressed("fire") and can_shoot:
+	if Input.is_action_just_pressed("fire") and can_shoot and not is_fire_buffered:
 		is_fire_buffered = true
 		fire_buffer_timer.start()
-		can_shoot = false
-		emit_signal("fire_disabled")
 	
 	if push_cast.is_colliding():
 		var projectile = push_cast.get_collider()
@@ -182,13 +180,18 @@ func handle_push():
 		if skybox_cast.is_colliding() and is_fire_buffered:
 			var target_position = skybox_cast.get_collision_point()
 			if projectile is Arrow:
+				shoot()
 				projectile.redirect(target_position, push_cast.get_collision_point())
 			else:
 				print("Warning: Tried to push a non-arrow projectile somehow...")
-			is_fire_buffered = false
-			fire_buffer_timer.stop()
-			fire_cooldown.start()
-			AudioManager.playGunshot()
+
+func shoot():
+	is_fire_buffered = false
+	fire_buffer_timer.stop()
+	can_shoot = false
+	emit_signal("fire_disabled")
+	fire_cooldown.start()
+	AudioManager.playGunshot()
 
 func handle_crouching():
 	if Input.is_action_pressed("crouch"):

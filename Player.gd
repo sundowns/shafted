@@ -80,7 +80,7 @@ func move_state(delta):
 		set_state(PlayerState.IDLE)
 		return
 	if not is_on_floor():
-			set_state(PlayerState.AIRBORNE)
+		set_state(PlayerState.AIRBORNE)
 
 func airborne_state(delta):
 	aerial_movement(delta)

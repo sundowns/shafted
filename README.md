@@ -11,7 +11,7 @@ Made with Godot in a weekend.
 ## Credit
 
 - Programming, Design, 3D Modelling - Tom Smallridge ( [Sundowns](https://github.com/sundowns) )
-- Audio/Music - Max Chapman ( [Sundowns](https://github.com/chappos) )
+- Audio/Music - Max Chapman ( [Chappos](https://github.com/chappos) )
 
 ## Screenshots
 

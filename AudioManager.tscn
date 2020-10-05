@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/footstep2.wav" type="AudioStream" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/audio/targetbreak.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/audio/gun.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/audio/gun2.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/audio/shafted.wav" type="AudioStream" id=7]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource( 1 )
@@ -31,4 +32,9 @@ stream = ExtResource( 4 )
 unit_db = 1.0
 unit_size = 8.0
 max_db = 1.0
+
+[node name="Shafted" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -5.0
 [connection signal="finished" from="TargetBreak" to="." method="_on_TargetBreak_finished"]
+[connection signal="finished" from="Shafted" to="." method="_on_Shafted_finished"]

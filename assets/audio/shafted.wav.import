@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/shafted.wav-228d2c3a44dc3a8debbc27d38df57004.sample"
+
+[deps]
+
+source_file="res://assets/audio/shafted.wav"
+dest_files=[ "res://.import/shafted.wav-228d2c3a44dc3a8debbc27d38df57004.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

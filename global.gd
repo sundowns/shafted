@@ -11,6 +11,7 @@ var current_level_index = 0
 
 func start_game():
 	var first_level_name = "res://levels/%s" % levels[current_level_index]
+	AudioManager.shafted.play()
 	get_tree().change_scene("res://Game.tscn")
 	call_deferred("append_level_scene", first_level_name)
 

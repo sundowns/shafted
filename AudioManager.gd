@@ -3,6 +3,7 @@ extends Node
 onready var footsteps = $Footsteps
 onready var gunshots = $Gunshots
 onready var target_break = $TargetBreak
+onready var shafted = $Shafted
 
 var rng = RandomNumberGenerator.new()
 
@@ -48,3 +49,7 @@ func playGunshot():
 
 func _on_TargetBreak_finished():
 	target_break.pitch_scale = rng.randf_range(0.9, 1.1)
+
+
+func _on_Shafted_finished():
+	shafted.play()

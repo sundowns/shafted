@@ -58,7 +58,7 @@ radius = 0.25
 
 [node name="Arrow" type="RigidBody"]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 11
 gravity_scale = 0.0
 continuous_cd = true
 linear_damp = 0.0
@@ -96,12 +96,14 @@ draw_pass_1 = SubResource( 4 )
 
 [node name="HeadContactArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.843049 )
+monitorable = false
 collision_layer = 0
 collision_mask = 11
 
 [node name="CollisionShape" type="CollisionShape" parent="HeadContactArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0920548 )
 shape = SubResource( 8 )
+disabled = true
 [connection signal="timeout" from="RedirectLockoutTimer" to="." method="_on_RedirectLockoutTimer_timeout"]
 [connection signal="timeout" from="HighlightFadeTimer" to="." method="remove_highlight"]
 [connection signal="timeout" from="ExpiryTimer" to="." method="_on_ExpiryTimer_timeout"]

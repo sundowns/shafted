@@ -9,6 +9,7 @@ onready var highlight_fade_timer: Timer = $HighlightFadeTimer
 onready var expiry_timer: Timer = $ExpiryTimer
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var hit_particles: Particles = $HitParticles
+onready var head_contact_area: Area = $HeadContactArea
 
 var can_redirect: bool = true
 
@@ -38,6 +39,7 @@ func queue_push(target_position: Vector3):
 func push_towards(target_position: Vector3):
 	set_orientation(target_position)
 	apply_impulse_towards_position(target_position)
+	head_contact_area.get_node("CollisionShape").disabled = false
 
 func highlight(highlight_material: Resource):
 	mesh.material_override = highlight_material

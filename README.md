@@ -15,11 +15,11 @@ Made with Godot in a weekend.
 
 ## Screenshots
 
-![Shafted3](./media/shafted_screenshot3.PNG)
+![Shafted3](./media/shafted_screenshot3.png)
 
-![Shafted1](./media/shafted_screenshot1.PNG)
+![Shafted1](./media/shafted_screenshot1.png)
 
-![Shafted2](./media/shafted_screenshot2.PNG)
+![Shafted2](./media/shafted_screenshot2.png)
 
 ## Controls
 

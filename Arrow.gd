@@ -6,6 +6,7 @@ export(float) var initial_speed := 15.0
 onready var mesh: MeshInstance = $arrow/Arrow
 onready var redirect_lockout_timer: Timer = $RedirectLockoutTimer
 onready var highlight_fade_timer: Timer = $HighlightFadeTimer
+onready var expiry_timer: Timer = $ExpiryTimer
 
 var can_redirect: bool = true
 
@@ -57,3 +58,8 @@ func _on_RedirectLockoutTimer_timeout():
 
 func _on_ExpiryTimer_timeout():
 	queue_free()
+
+func hit_target():
+	gravity_scale = 1.0
+	expiry_timer.stop()
+	expiry_timer.start(2)

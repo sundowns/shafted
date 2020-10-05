@@ -3,7 +3,7 @@
 [ext_resource path="res://Target.gd" type="Script" id=1]
 [ext_resource path="res://meshes/target.tscn" type="PackedScene" id=2]
 
-[sub_resource type="CylinderShape" id=3]
+[sub_resource type="CylinderShape" id=1]
 radius = 0.43
 height = 0.13
 
@@ -18,7 +18,7 @@ transform = Transform( 0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Hitbox" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
@@ -26,5 +26,5 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Hitbox"]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

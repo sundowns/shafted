@@ -1,0 +1,131 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/skybox.png" type="Texture" id=2]
+[ext_resource path="res://Floor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Skybox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://OuterWalls.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://PortalPair.tscn" type="PackedScene" id=7]
+[ext_resource path="res://CubeFamily.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ResetSignButtonPair.tscn" type="PackedScene" id=9]
+[ext_resource path="res://MovingTarget.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Cube.tscn" type="PackedScene" id=11]
+[ext_resource path="res://LevelCompleteZone.tscn" type="PackedScene" id=12]
+[ext_resource path="res://SmallWall.tscn" type="PackedScene" id=13]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 2 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0.619608, 0.619608, 0.619608, 0.584314 )
+fog_depth_begin = 4.0
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 1.0
+
+[sub_resource type="Curve3D" id=3]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.0517311, 6.36016, -13.2838, 0, 0, 0, 0, 0, 0, 26.9583, -3.7548, -13.2838, 0, 0, 0, 0, 0, 0, 27.0383, 6.20024, -13.2838, 0, 0, 0, 0, 0, 0, 0.0278816, -3.82804, -13.2838, 0, 0, 0, 0, 0, 0, 0.0517311, 6.36016, -13.2838 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
+
+[node name="World" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.18626, 0 )
+
+[node name="Projectiles" type="Node" parent="."]
+
+[node name="Statics" type="Node" parent="."]
+
+[node name="Floor" parent="Statics" instance=ExtResource( 3 )]
+
+[node name="Skybox" parent="Statics" instance=ExtResource( 4 )]
+
+[node name="OuterWalls" parent="Statics" instance=ExtResource( 5 )]
+
+[node name="CubeFamily" parent="Statics" instance=ExtResource( 8 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )
+
+[node name="Cube" parent="Statics" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91832, 7.06427 )
+
+[node name="ResetSignButtonPair" parent="Statics/Cube" instance=ExtResource( 9 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0.847556, 2.09892, 0.856861 )
+
+[node name="ExitRoom" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95374, -16.7749 )
+
+[node name="Wall" parent="ExitRoom" instance=ExtResource( 13 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, -1.615, -0.055, 0 )
+
+[node name="Wall2" parent="ExitRoom" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 0.975, 0, 0, 0, 1, 0, -0.055, -2 )
+
+[node name="Wall3" parent="ExitRoom" instance=ExtResource( 13 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 0.975, 0, -1, 0, -1.62921e-07, 1.615, -0.055, 0 )
+
+[node name="Wall4" parent="ExitRoom" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, -4.5897e-08, -1, 0, 1.05, -4.37114e-08, -0.0132948, 2.23627, -0.18379 )
+
+[node name="Door" parent="ExitRoom" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.225, 1.725 )
+count_to_open = 2
+
+[node name="LevelCompleteZone" parent="ExitRoom" instance=ExtResource( 12 )]
+transform = Transform( -3.25841e-07, 0, 1, 0, 1, 0, -2, 0, -1.62921e-07, 0, -0.225976, 0 )
+
+[node name="PortalPair" parent="." instance=ExtResource( 7 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 3.5, 6.374, 0 )
+arrow_count = 2
+
+[node name="PortalPair2" parent="." instance=ExtResource( 7 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -3.5, 6.374, 0 )
+arrow_count = 2
+
+[node name="MovingTarget" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 7.548, 13.473 )
+
+[node name="Path" parent="MovingTarget" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-06, 0, 28.5642 )
+curve = SubResource( 3 )
+
+[node name="PathFollow" parent="MovingTarget/Path" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+move_speed = 6.0
+
+[node name="Target" parent="MovingTarget/Path/PathFollow" index="0"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="MovingTarget2" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -30.5604, 7.548, 13.473 )
+
+[node name="Path" parent="MovingTarget2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-06, 0, 28.5642 )
+curve = SubResource( 3 )
+
+[node name="PathFollow" parent="MovingTarget2/Path" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+move_speed = 6.0
+
+[node name="Target" parent="MovingTarget2/Path/PathFollow" index="0"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+[connection signal="target_hit" from="MovingTarget/Path/PathFollow/Target" to="ExitRoom/Door" method="_on_Target_target_hit"]
+[connection signal="target_hit" from="MovingTarget2/Path/PathFollow/Target" to="ExitRoom/Door" method="_on_Target_target_hit"]
+
+[editable path="PortalPair"]
+
+[editable path="PortalPair2"]
+
+[editable path="MovingTarget"]
+
+[editable path="MovingTarget2"]

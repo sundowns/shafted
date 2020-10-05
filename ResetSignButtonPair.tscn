@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://meshes/sign.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ResetButton.tscn" type="PackedScene" id=3]
+
+[node name="ResetSignButtonPair" type="Spatial"]
+
+[node name="sign2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.852613, 0, 0.522543, 0, 1, 0, -0.522543, 0, 0.852613, 0, 1.5, 0 )
+
+[node name="ResetButton" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.930193, 0, 0.36707, 0, 1, 0, -0.36707, 0, 0.930193, 1.44898, 0.8, -0.260753 )

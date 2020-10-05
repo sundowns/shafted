@@ -31,7 +31,7 @@ collision_mask = 4
 
 [node name="InteractCast" type="RayCast" parent="Head"]
 enabled = true
-cast_to = Vector3( 0, 0, -3 )
+cast_to = Vector3( 0, 0, -4.5 )
 collision_mask = 21
 collide_with_areas = true
 

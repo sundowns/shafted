@@ -116,7 +116,10 @@ func grounded_movement(delta):
 		effective_ground_accel = effective_ground_accel * crouching_speed_modifier
 	velocity = velocity.linear_interpolate(direction * effectve_ground_speed, effective_ground_accel * delta)
 	if abs(velocity.x) > 4 or abs(velocity.z) > 4: 
-		AudioManager.playFootstep()
+		if is_crouching:
+			AudioManager.playCrouchFootstep()
+		else:
+			AudioManager.playFootstep()
 
 func aerial_movement(delta):
 	direction = Vector3.ZERO
@@ -181,6 +184,11 @@ func handle_crouching():
 	else:
 		is_crouching = false
 		head.transform.origin = head_position
+		
+	if Input.is_action_just_pressed("crouch"):
+		AudioManager.stopFootsteps()
+	elif Input.is_action_just_released("crouch"):
+		AudioManager.stopFootsteps()
 
 func handle_interaction():
 	if interact_cast.is_colliding():

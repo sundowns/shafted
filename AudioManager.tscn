@@ -21,3 +21,4 @@ stream = ExtResource( 4 )
 unit_db = 1.0
 unit_size = 8.0
 max_db = 1.0
+[connection signal="finished" from="TargetBreak" to="." method="_on_TargetBreak_finished"]

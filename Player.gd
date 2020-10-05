@@ -7,7 +7,7 @@ enum PlayerState {
 }
 
 # Player movement values
-export(float) var jump_force: float = 10 # Initial vertical impulse when jumping
+export(float) var jump_force: float = 8 # Initial vertical impulse when jumping
 export(float) var ground_speed: float = 10
 export(float) var ground_acceleration: float = 16
 export(float) var aerial_speed: float = 14
@@ -19,6 +19,7 @@ onready var camera: Camera = $Head/Camera
 onready var head: Spatial = $Head
 onready var skybox_cast: RayCast = $Head/SkyboxCast
 onready var push_cast: RayCast = $Head/PushCast
+onready var fire_timer: Timer = $FireTimer
 
 const highlight_material = preload("res://materials/push_highlight.tres")
 const mouse_sensitivity: float = 0.05
@@ -27,6 +28,7 @@ const terminal_fall_velocity: float = -25.0
 var velocity := Vector3.ZERO
 var direction := Vector3.ZERO
 var state = PlayerState.IDLE
+var is_firing: bool = false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -37,9 +39,6 @@ func _input(event):
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
-	
-#	if event is InputEventMouseButton and event.pressed:
-#		print(event)
 
 func _physics_process(delta):
 	match state:
@@ -129,9 +128,8 @@ func apply_movement():
 		move_and_slide(velocity, Vector3.UP)
 
 func handle_jump():
-	# TODO: may want to use groundcheck raycasts if this is no bueno
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity += Vector3.UP * jump_force
+		velocity.y = (Vector3.UP * jump_force).y
 
 func handle_gravity(delta):
 	if not is_on_floor():
@@ -146,13 +144,22 @@ func handle_ceiling_collision():
 		velocity.y = 0
 
 func handle_push():
+	if Input.is_action_just_pressed("fire"):
+		is_firing = true
+		fire_timer.start()
+	
 	if push_cast.is_colliding():
 		var projectile = push_cast.get_collider()
 		projectile.highlight(highlight_material)
 		
-		if skybox_cast.is_colliding() and Input.is_action_pressed("fire"):
+		if skybox_cast.is_colliding() and is_firing:
 			var target_position = skybox_cast.get_collision_point()
 			if projectile is Arrow:
 				projectile.redirect(target_position, push_cast.get_collision_point())
 			else:
 				print("Warning: Tried to push a non-arrow projectile somehow...")
+			is_firing = false
+			fire_timer.stop()
+
+func _on_FireTimer_timeout():
+	is_firing = false

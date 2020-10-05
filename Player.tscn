@@ -27,3 +27,8 @@ cast_to = Vector3( 0, 0, -250 )
 enabled = true
 cast_to = Vector3( 0, 0, -6 )
 collision_mask = 4
+
+[node name="FireTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.3
+[connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]
